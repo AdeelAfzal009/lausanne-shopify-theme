@@ -1,0 +1,553 @@
+{{ 'section-events.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'events.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign s = section.settings
+
+  # Build an ISO-8601 timestamp so the browser resolves the countdown against
+  # the event's timezone rather than the visitor's.
+  assign countdown_target = ''
+  if s.event_date != blank
+    assign event_time = s.event_time | default: '00:00'
+    assign countdown_target = s.event_date | append: 'T' | append: event_time | append: ':00' | append: s.event_timezone
+  endif
+
+  assign has_desktop_image = false
+  if s.image != blank
+    assign has_desktop_image = true
+  endif
+
+  # Precomputed: filters written inline after `alt:` would chain onto
+  # image_tag's output instead of the alt value and blank out the tag.
+  assign hero_alt = s.image.alt | default: s.heading | strip_html
+  assign hero_mobile_alt = s.mobile_image.alt | default: s.heading | strip_html
+
+  # Aspect ratios for "Adapt to image": the layer that's actually visible at
+  # each breakpoint (mirroring the mobile/desktop layer swap below) decides
+  # the box's proportions, falling back to the other image if one is missing.
+  assign mobile_aspect_ratio = s.mobile_image.aspect_ratio | default: s.image.aspect_ratio | default: 1.78
+  assign desktop_aspect_ratio = s.image.aspect_ratio | default: s.mobile_image.aspect_ratio | default: 1.78
+
+  # Overlay alphas are resolved here rather than with calc()/var() in CSS: a
+  # custom property that fails to substitute kills the whole background
+  # declaration, which would drop the overlay entirely at every setting.
+  assign overlay_alpha = s.overlay_opacity | divided_by: 100.0
+  assign overlay_alpha_mid = s.overlay_opacity | times: 0.85 | divided_by: 100.0
+  assign overlay_alpha_end = s.overlay_opacity | times: 0.25 | divided_by: 100.0
+-%}
+
+{%- comment -%}
+  Written straight onto the element: an inline style cannot be lost to a
+  selector mismatch or beaten by another rule, so the setting always wins.
+{%- endcomment -%}
+{%- capture overlay_style -%}
+  {%- if s.overlay_style == 'solid' -%}
+    background-color: rgba(0, 0, 0, {{ overlay_alpha }});
+  {%- else -%}
+    background-image: linear-gradient({{ s.overlay_direction }}, rgba(0, 0, 0, {{ overlay_alpha }}) 0%, rgba(0, 0, 0, {{ overlay_alpha_mid }}) 42%, rgba(0, 0, 0, {{ overlay_alpha_end }}) 100%);
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- style -%}
+  #EventHero-{{ section.id }} {
+    --events-accent: {{ s.accent_color }};
+    --events-text: {{ s.text_color }};
+    --events-muted: {{ s.text_color | color_modify: 'alpha', 0.62 }};
+    --events-bg: {{ s.background_color }};
+    --events-hairline: {{ s.text_color | color_modify: 'alpha', 0.16 }};
+    --events-button-label: {{ s.button_text_color }};
+    --events-focal: {{ s.image.presentation.focal_point | default: 'center' }};
+  }
+
+  #EventHero-{{ section.id }} .event-hero__content {
+    padding-top: {{ s.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ s.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  {%- comment -%}
+    "Adapt to image" sizes the box to the visible image's own proportions
+    instead of a fixed height, so object-fit: contain never has to letterbox.
+  {%- endcomment -%}
+  {%- if s.section_height == 'adapt' -%}
+    #EventHero-{{ section.id }} .event-hero {
+      aspect-ratio: {{ mobile_aspect_ratio }};
+      min-height: 0;
+    }
+  {%- endif -%}
+
+  @media screen and (min-width: 750px) {
+    #EventHero-{{ section.id }} .event-hero__content {
+      padding-top: {{ s.padding_top }}px;
+      padding-bottom: {{ s.padding_bottom }}px;
+    }
+
+    {%- if s.section_height == 'adapt' -%}
+      #EventHero-{{ section.id }} .event-hero {
+        aspect-ratio: {{ desktop_aspect_ratio }};
+      }
+    {%- endif -%}
+  }
+{%- endstyle -%}
+
+<div
+  id="EventHero-{{ section.id }}"
+  class="events-section{% if s.heading_font == 'theme' %} events-section--theme-font{% endif %}"
+>
+  <div class="event-hero event-hero--{{ s.section_height }} event-hero--{{ s.content_alignment }} event-hero--mobile-{{ s.mobile_content_position }}">
+    {%- comment -%} Background media {%- endcomment -%}
+    <div class="event-hero__media">
+      {%- if s.background_video != blank -%}
+        {{
+          s.background_video
+          | video_tag: image_size: '1100x', autoplay: true, loop: true, muted: true, controls: false
+        }}
+      {%- else -%}
+        {%- if s.mobile_image != blank -%}
+          <div class="event-hero__layer event-hero__layer--mobile">
+            {{
+              s.mobile_image
+              | image_url: width: 1500
+              | image_tag:
+                loading: 'eager',
+                fetchpriority: 'high',
+                width: s.mobile_image.width,
+                height: s.mobile_image.height,
+                sizes: '100vw',
+                widths: '375, 550, 750, 1100, 1500',
+                alt: hero_mobile_alt
+            }}
+          </div>
+        {%- endif -%}
+
+        {%- if has_desktop_image -%}
+          <div class="event-hero__layer{% if s.mobile_image != blank %} event-hero__layer--desktop{% endif %}">
+            {{
+              s.image
+              | image_url: width: 3840
+              | image_tag:
+                loading: 'eager',
+                fetchpriority: 'high',
+                width: s.image.width,
+                height: s.image.height,
+                sizes: '100vw',
+                widths: '750, 1100, 1500, 1780, 2000, 2600, 3000, 3840',
+                alt: hero_alt
+            }}
+          </div>
+        {%- elsif s.mobile_image == blank -%}
+          {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+
+    <div class="event-hero__overlay" style="{{ overlay_style | strip_newlines | strip }}"></div>
+
+    <div class="event-hero__inner page-width">
+      <div class="event-hero__content">
+        {%- if s.eyebrow != blank -%}
+          <p class="events-eyebrow">{{ s.eyebrow | escape }}</p>
+        {%- endif -%}
+
+        {%- if s.heading != blank -%}
+          <h2 class="events-heading event-hero__title">{{ s.heading }}</h2>
+        {%- endif -%}
+
+        {%- if s.subheading != blank -%}
+          <p class="events-subheading">{{ s.subheading | escape }}</p>
+        {%- endif -%}
+
+        {%- if s.event_dates != blank or s.event_venue != blank -%}
+          <ul class="event-hero__meta" role="list">
+            {%- if s.event_dates != blank -%}
+              <li class="event-hero__meta-item">
+                <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.2">
+                  <rect x="1.6" y="3.2" width="12.8" height="11.2" />
+                  <path d="M1.6 6.6h12.8M5.1 1.6v3.2M10.9 1.6v3.2" />
+                </svg>
+                <span>{{ s.event_dates | escape }}</span>
+              </li>
+            {%- endif -%}
+            {%- if s.event_venue != blank -%}
+              <li class="event-hero__meta-item">
+                <svg viewBox="0 0 12 14" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.1">
+                  <path d="M6 .8c2.4 0 4.4 2 4.4 4.4 0 3.1-4.4 7.5-4.4 7.5S1.6 8.3 1.6 5.2C1.6 2.8 3.6.8 6 .8z" />
+                  <circle cx="6" cy="5.2" r="1.6" />
+                </svg>
+                <span>{{ s.event_venue | escape }}</span>
+              </li>
+            {%- endif -%}
+          </ul>
+        {%- endif -%}
+
+        {%- if s.description != blank -%}
+          <div class="events-text rte">{{ s.description }}</div>
+        {%- endif -%}
+
+        {%- if s.show_countdown and countdown_target != blank -%}
+          <event-countdown data-target="{{ countdown_target }}">
+            <ul
+              class="event-countdown"
+              data-countdown-timer
+              role="list"
+              aria-label="{{ s.countdown_aria_label | escape }}"
+            >
+              <li class="event-countdown__unit">
+                <span class="event-countdown__value" data-unit="days">00</span>
+                <span class="event-countdown__label">{{ s.label_days | escape }}</span>
+              </li>
+              <li class="event-countdown__unit">
+                <span class="event-countdown__value" data-unit="hours">00</span>
+                <span class="event-countdown__label">{{ s.label_hours | escape }}</span>
+              </li>
+              <li class="event-countdown__unit">
+                <span class="event-countdown__value" data-unit="minutes">00</span>
+                <span class="event-countdown__label">{{ s.label_minutes | escape }}</span>
+              </li>
+              <li class="event-countdown__unit">
+                <span class="event-countdown__value" data-unit="seconds">00</span>
+                <span class="event-countdown__label">{{ s.label_seconds | escape }}</span>
+              </li>
+            </ul>
+            {%- if s.expired_text != blank -%}
+              <p class="event-countdown__expired" data-countdown-expired hidden>{{ s.expired_text | escape }}</p>
+            {%- endif -%}
+          </event-countdown>
+        {%- endif -%}
+
+        {%- if s.button_label != blank -%}
+          <div class="event-hero__cta">
+            <a
+              href="{{ s.button_link | default: '#' }}"
+              class="events-button{% if s.button_style == 'outline' %} events-button--outline{% endif %}"
+            >
+              {{- s.button_label | escape -}}
+              <svg viewBox="0 0 10 10" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.2">
+                <path d="M3 1l4 4-4 4" />
+              </svg>
+            </a>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Event hero + countdown",
+  "tag": "section",
+  "class": "section-event-hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile background image",
+      "info": "Optional. Falls back to the desktop image."
+    },
+    {
+      "type": "video",
+      "id": "background_video",
+      "label": "Background video",
+      "info": "Optional. Plays muted on loop and replaces the images above."
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "label": "Overlay darkness",
+      "info": "Darkens the background so the text stays readable. 0% removes it entirely.",
+      "default": 60
+    },
+    {
+      "type": "select",
+      "id": "overlay_style",
+      "label": "Overlay style",
+      "options": [
+        { "value": "gradient", "label": "Fade across the image" },
+        { "value": "solid", "label": "Even across the image" }
+      ],
+      "default": "gradient"
+    },
+    {
+      "type": "select",
+      "id": "overlay_direction",
+      "label": "Darkest edge",
+      "info": "Applies when the overlay fades across the image.",
+      "options": [
+        { "value": "100deg", "label": "Left" },
+        { "value": "260deg", "label": "Right" },
+        { "value": "to top", "label": "Bottom" },
+        { "value": "to bottom", "label": "Top" }
+      ],
+      "default": "100deg"
+    },
+    {
+      "type": "select",
+      "id": "section_height",
+      "label": "Section height",
+      "options": [
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" },
+        { "value": "full", "label": "Full screen" },
+        { "value": "adapt", "label": "Adapt to image" }
+      ],
+      "info": "\"Adapt to image\" sizes the section to the image's own proportions on both mobile and desktop, so nothing is cropped or letterboxed.",
+      "default": "large"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Content position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "mobile_content_position",
+      "label": "Content position (mobile)",
+      "info": "Vertical position of the content on small screens.",
+      "options": [
+        { "value": "top", "label": "Top" },
+        { "value": "middle", "label": "Middle" },
+        { "value": "bottom", "label": "Bottom" }
+      ],
+      "default": "middle"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Label above heading",
+      "default": "Upcoming show"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Brilliance Unveiled"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "A luxury jewellery exhibition"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Discover our finest creations at an exclusive showcase of craftsmanship, elegance and timeless beauty.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Event details"
+    },
+    {
+      "type": "text",
+      "id": "event_dates",
+      "label": "Dates",
+      "info": "Shown as typed, next to a calendar icon.",
+      "default": "30 September – 4 October 2026"
+    },
+    {
+      "type": "text",
+      "id": "event_venue",
+      "label": "Venue",
+      "info": "Shown as typed, next to a location icon.",
+      "default": "Expo Centre Sharjah"
+    },
+    {
+      "type": "header",
+      "content": "Countdown"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_countdown",
+      "label": "Show countdown",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "event_date",
+      "label": "Event date",
+      "info": "Use the format YYYY-MM-DD, e.g. 2026-11-14.",
+      "default": "2026-11-14"
+    },
+    {
+      "type": "text",
+      "id": "event_time",
+      "label": "Event start time",
+      "info": "24-hour format, e.g. 18:00.",
+      "default": "18:00"
+    },
+    {
+      "type": "select",
+      "id": "event_timezone",
+      "label": "Event timezone",
+      "info": "The countdown is the same for every visitor, wherever they are.",
+      "options": [
+        { "value": "+04:00", "label": "GST — Dubai, Abu Dhabi (UTC+4)" },
+        { "value": "+03:00", "label": "AST — Riyadh, Doha, Kuwait (UTC+3)" },
+        { "value": "+05:00", "label": "PKT — Karachi (UTC+5)" },
+        { "value": "+05:30", "label": "IST — India (UTC+5:30)" },
+        { "value": "+01:00", "label": "CET — Paris, Geneva (UTC+1)" },
+        { "value": "+02:00", "label": "CEST / EET (UTC+2)" },
+        { "value": "+00:00", "label": "GMT — London (UTC+0)" },
+        { "value": "-04:00", "label": "EDT — New York (UTC-4)" },
+        { "value": "-05:00", "label": "EST — New York (UTC-5)" },
+        { "value": "+08:00", "label": "HKT / SGT — Hong Kong, Singapore (UTC+8)" }
+      ],
+      "default": "+04:00"
+    },
+    {
+      "type": "text",
+      "id": "label_days",
+      "label": "\"Days\" label",
+      "default": "Days"
+    },
+    {
+      "type": "text",
+      "id": "label_hours",
+      "label": "\"Hours\" label",
+      "default": "Hrs"
+    },
+    {
+      "type": "text",
+      "id": "label_minutes",
+      "label": "\"Minutes\" label",
+      "default": "Mins"
+    },
+    {
+      "type": "text",
+      "id": "label_seconds",
+      "label": "\"Seconds\" label",
+      "default": "Secs"
+    },
+    {
+      "type": "text",
+      "id": "countdown_aria_label",
+      "label": "Countdown screen reader label",
+      "default": "Time remaining until the exhibition"
+    },
+    {
+      "type": "text",
+      "id": "expired_text",
+      "label": "Message once the event starts",
+      "default": "The doors are open — join us now."
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Register now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        { "value": "solid", "label": "Solid" },
+        { "value": "outline", "label": "Outline" }
+      ],
+      "default": "solid"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button label colour",
+      "info": "Used when the button is filled with the accent colour. An outline button uses the accent colour for its label.",
+      "default": "#1a1206"
+    },
+    {
+      "type": "header",
+      "content": "Colours & type"
+    },
+    {
+      "type": "select",
+      "id": "heading_font",
+      "label": "Heading font",
+      "options": [
+        { "value": "serif", "label": "Elegant serif" },
+        { "value": "theme", "label": "Theme heading font" }
+      ],
+      "default": "serif"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent colour",
+      "default": "#c6a15b"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text colour",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background colour",
+      "default": "#0a0a0a"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 80
+    }
+  ],
+  "presets": [
+    {
+      "name": "Event hero + countdown",
+      "category": "Events"
+    }
+  ]
+}
+{% endschema %}

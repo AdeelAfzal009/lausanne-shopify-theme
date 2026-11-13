@@ -1,0 +1,469 @@
+{% doc %}
+  @prompt
+    Modify the Dawn theme video section to autoplay videos automatically and add the ability to use different videos for desktop and mobile devices. The section should include settings to upload separate video files or URLs for desktop and mobile, detect the device type, and display the appropriate video. The autoplay should work on both device types while respecting user preferences and browser autoplay policies. Video should be full width we can add diff video for desktop and diff for phone
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-responsive-video-{{ ai_gen_id }} {
+    display: block;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .ai-responsive-video__wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    /* Fallback only — JS sets this to the actual video's own ratio as soon as
+       its metadata loads, so cropping stays as small as possible. */
+    aspect-ratio: 16 / 9;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  /* A full-width 16:9 video is taller than the viewport on most laptop
+     screens once the sticky header is accounted for, forcing a scroll before
+     the visitor sees the rest of the page. Capping the height below that
+     point and letting object-fit: cover crop into the video is what keeps it
+     edge-to-edge with no scroll and no black bars on either side. */
+  @media screen and (min-width: 750px) {
+    .ai-responsive-video__wrapper-{{ ai_gen_id }} {
+      max-height: calc(100vh - var(--header-height, 0px));
+    }
+  }
+
+  .ai-responsive-video__video-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: {{ settings.media_radius }}px;
+  }
+
+  .ai-responsive-video__desktop-{{ ai_gen_id }} {
+    display: block;
+  }
+
+  .ai-responsive-video__mobile-{{ ai_gen_id }} {
+    display: none;
+  }
+
+  .ai-responsive-video__placeholder-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f4f4;
+    color: #666;
+    font-size: 16px;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .ai-responsive-video__controls-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10;
+    display: flex;
+    gap: 10px;
+  }
+
+  .ai-responsive-video__button-{{ ai_gen_id }} {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.6);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+    color: #ffffff;
+  }
+
+  .ai-responsive-video__button-{{ ai_gen_id }}:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  .ai-responsive-video__button-{{ ai_gen_id }} svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-responsive-video__desktop-{{ ai_gen_id }} {
+      display: none;
+    }
+
+    .ai-responsive-video__mobile-{{ ai_gen_id }} {
+      display: block;
+    }
+
+    .ai-responsive-video__controls-{{ ai_gen_id }} {
+      bottom: 10px;
+      right: 10px;
+    }
+
+    .ai-responsive-video__button-{{ ai_gen_id }} {
+      width: 40px;
+      height: 40px;
+    }
+  }
+{% endstyle %}
+
+<responsive-video-{{ ai_gen_id }}
+  class="ai-responsive-video-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+  data-autoplay="{{ block.settings.autoplay }}"
+  data-loop="{{ block.settings.loop }}"
+  data-show-controls="{{ block.settings.show_controls }}"
+>
+  <div class="ai-responsive-video__wrapper-{{ ai_gen_id }}">
+    {% liquid
+      assign desktop_video_url = block.settings.desktop_video_url
+      assign mobile_video_url = block.settings.mobile_video_url
+      assign has_desktop_video = false
+      assign has_mobile_video = false
+
+      if desktop_video_url != blank
+        assign has_desktop_video = true
+      endif
+
+      if mobile_video_url != blank
+        assign has_mobile_video = true
+      endif
+    %}
+
+    {% if has_desktop_video %}
+      <video
+        class="ai-responsive-video__video-{{ ai_gen_id }} ai-responsive-video__desktop-{{ ai_gen_id }}"
+        {% if block.settings.autoplay %}autoplay{% endif %}
+        {% if block.settings.loop %}loop{% endif %}
+        {% if block.settings.muted %}muted{% endif %}
+        playsinline
+        preload="metadata"
+        aria-label="Desktop video"
+      >
+        <source src="{{ desktop_video_url }}" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    {% else %}
+      <div class="ai-responsive-video__placeholder-{{ ai_gen_id }} ai-responsive-video__desktop-{{ ai_gen_id }}">
+        <p>Add a desktop video URL or upload a video file</p>
+      </div>
+    {% endif %}
+
+    {% if has_mobile_video %}
+      <video
+        class="ai-responsive-video__video-{{ ai_gen_id }} ai-responsive-video__mobile-{{ ai_gen_id }}"
+        {% if block.settings.autoplay %}autoplay{% endif %}
+        {% if block.settings.loop %}loop{% endif %}
+        {% if block.settings.muted %}muted{% endif %}
+        playsinline
+        preload="metadata"
+        aria-label="Mobile video"
+      >
+        <source src="{{ mobile_video_url }}" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    {% elsif has_desktop_video %}
+      <video
+        class="ai-responsive-video__video-{{ ai_gen_id }} ai-responsive-video__mobile-{{ ai_gen_id }}"
+        {% if block.settings.autoplay %}autoplay{% endif %}
+        {% if block.settings.loop %}loop{% endif %}
+        {% if block.settings.muted %}muted{% endif %}
+        playsinline
+        preload="metadata"
+        aria-label="Mobile video"
+      >
+        <source src="{{ desktop_video_url }}" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    {% else %}
+      <div class="ai-responsive-video__placeholder-{{ ai_gen_id }} ai-responsive-video__mobile-{{ ai_gen_id }}">
+        <p>Add a mobile video URL or use the desktop video</p>
+      </div>
+    {% endif %}
+
+    {% if block.settings.show_controls and has_desktop_video or has_mobile_video %}
+      <div class="ai-responsive-video__controls-{{ ai_gen_id }}">
+        <button
+          class="ai-responsive-video__button-{{ ai_gen_id }} ai-responsive-video__play-pause-{{ ai_gen_id }}"
+          aria-label="Play or pause video"
+          type="button"
+        >
+          <svg class="ai-responsive-video__play-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+          <svg class="ai-responsive-video__pause-icon-{{ ai_gen_id }}" style="display: none;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="6" y="4" width="4" height="16"></rect>
+            <rect x="14" y="4" width="4" height="16"></rect>
+          </svg>
+        </button>
+        <button
+          class="ai-responsive-video__button-{{ ai_gen_id }} ai-responsive-video__mute-{{ ai_gen_id }}"
+          aria-label="Mute or unmute video"
+          type="button"
+        >
+          <svg class="ai-responsive-video__volume-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          </svg>
+          <svg class="ai-responsive-video__mute-icon-{{ ai_gen_id }}" style="display: none;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <line x1="23" y1="9" x2="17" y2="15"></line>
+            <line x1="17" y1="9" x2="23" y2="15"></line>
+          </svg>
+        </button>
+      </div>
+    {% endif %}
+  </div>
+</responsive-video-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class ResponsiveVideo{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.wrapper = null;
+        this.videos = null;
+        this.currentVideo = null;
+        this.playPauseButton = null;
+        this.muteButton = null;
+        this.playIcon = null;
+        this.pauseIcon = null;
+        this.volumeIcon = null;
+        this.muteIcon = null;
+      }
+
+      connectedCallback() {
+        this.wrapper = this.querySelector('.ai-responsive-video__wrapper-{{ ai_gen_id }}');
+        this.videos = this.querySelectorAll('.ai-responsive-video__video-{{ ai_gen_id }}');
+        this.playPauseButton = this.querySelector('.ai-responsive-video__play-pause-{{ ai_gen_id }}');
+        this.muteButton = this.querySelector('.ai-responsive-video__mute-{{ ai_gen_id }}');
+        this.playIcon = this.querySelector('.ai-responsive-video__play-icon-{{ ai_gen_id }}');
+        this.pauseIcon = this.querySelector('.ai-responsive-video__pause-icon-{{ ai_gen_id }}');
+        this.volumeIcon = this.querySelector('.ai-responsive-video__volume-icon-{{ ai_gen_id }}');
+        this.muteIcon = this.querySelector('.ai-responsive-video__mute-icon-{{ ai_gen_id }}');
+
+        if (this.videos.length === 0) return;
+
+        this.videos.forEach((video) => {
+          video.addEventListener('loadedmetadata', () => this.applyAspectRatio(video));
+        });
+
+        this.detectCurrentVideo();
+        this.setupEventListeners();
+        this.handleAutoplay();
+        this.updateControlsState();
+
+        window.addEventListener('resize', this.handleResize.bind(this));
+      }
+
+      detectCurrentVideo() {
+        this.videos.forEach((video) => {
+          const computedStyle = window.getComputedStyle(video);
+          if (computedStyle.display !== 'none') {
+            this.currentVideo = video;
+          }
+        });
+
+        if (this.currentVideo) this.applyAspectRatio(this.currentVideo);
+      }
+
+      /* Sizes the wrapper to the visible video's own dimensions the moment
+         they're known, so object-fit: contain never has to letterbox it —
+         a video's real ratio is only readable off the element itself, there
+         is nowhere in Liquid to precompute it from a plain URL field. */
+      applyAspectRatio(video) {
+        if (!this.wrapper || video !== this.currentVideo) return;
+        if (!video.videoWidth || !video.videoHeight) return;
+        this.wrapper.style.aspectRatio = `${video.videoWidth} / ${video.videoHeight}`;
+      }
+
+      handleResize() {
+        const previousVideo = this.currentVideo;
+        this.detectCurrentVideo();
+
+        if (previousVideo !== this.currentVideo && previousVideo) {
+          previousVideo.pause();
+          previousVideo.currentTime = 0;
+
+          if (this.dataset.autoplay === 'true') {
+            this.playCurrentVideo();
+          }
+        }
+      }
+
+      setupEventListeners() {
+        if (this.playPauseButton) {
+          this.playPauseButton.addEventListener('click', this.togglePlayPause.bind(this));
+        }
+
+        if (this.muteButton) {
+          this.muteButton.addEventListener('click', this.toggleMute.bind(this));
+        }
+
+        this.videos.forEach((video) => {
+          video.addEventListener('play', this.updateControlsState.bind(this));
+          video.addEventListener('pause', this.updateControlsState.bind(this));
+          video.addEventListener('volumechange', this.updateControlsState.bind(this));
+        });
+      }
+
+      handleAutoplay() {
+        if (this.dataset.autoplay === 'true' && this.currentVideo) {
+          this.playCurrentVideo();
+        }
+      }
+
+      playCurrentVideo() {
+        if (!this.currentVideo) return;
+
+        const playPromise = this.currentVideo.play();
+
+        if (playPromise !== undefined) {
+          playPromise.catch((error) => {
+            console.log('Autoplay prevented:', error);
+            if (this.currentVideo) {
+              this.currentVideo.muted = true;
+              this.currentVideo.play().catch((e) => {
+                console.log('Muted autoplay also prevented:', e);
+              });
+            }
+          });
+        }
+      }
+
+      togglePlayPause() {
+        if (!this.currentVideo) return;
+
+        if (this.currentVideo.paused) {
+          this.currentVideo.play();
+        } else {
+          this.currentVideo.pause();
+        }
+      }
+
+      toggleMute() {
+        if (!this.currentVideo) return;
+
+        this.currentVideo.muted = !this.currentVideo.muted;
+      }
+
+      updateControlsState() {
+        if (!this.currentVideo) return;
+
+        if (this.playIcon && this.pauseIcon) {
+          if (this.currentVideo.paused) {
+            this.playIcon.style.display = 'block';
+            this.pauseIcon.style.display = 'none';
+          } else {
+            this.playIcon.style.display = 'none';
+            this.pauseIcon.style.display = 'block';
+          }
+        }
+
+        if (this.volumeIcon && this.muteIcon) {
+          if (this.currentVideo.muted) {
+            this.volumeIcon.style.display = 'none';
+            this.muteIcon.style.display = 'block';
+          } else {
+            this.volumeIcon.style.display = 'block';
+            this.muteIcon.style.display = 'none';
+          }
+        }
+      }
+
+      disconnectedCallback() {
+        window.removeEventListener('resize', this.handleResize.bind(this));
+      }
+    }
+
+    customElements.define('responsive-video-{{ ai_gen_id }}', ResponsiveVideo{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Responsive video",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Desktop video"
+    },
+    {
+      "type": "text",
+      "id": "desktop_video_url",
+      "label": "Desktop video URL",
+      "info": "Upload your video to Shopify Files and paste the URL here, or use an external video URL (MP4 format recommended)"
+    },
+    {
+      "type": "header",
+      "content": "Mobile video"
+    },
+    {
+      "type": "text",
+      "id": "mobile_video_url",
+      "label": "Mobile video URL",
+      "info": "Optional: Add a different video for mobile devices. If left empty, the desktop video will be used on mobile"
+    },
+    {
+      "type": "header",
+      "content": "Video settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay video",
+      "default": true,
+      "info": "Videos will autoplay muted to comply with browser policies"
+    },
+    {
+      "type": "checkbox",
+      "id": "loop",
+      "label": "Loop video",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "muted",
+      "label": "Start muted",
+      "default": true,
+      "info": "Required for autoplay to work in most browsers"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_controls",
+      "label": "Show video controls",
+      "default": true,
+      "info": "Display play/pause and mute buttons"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#000000",
+      "info": "Visible while the video is loading and around it if it doesn't fill the section exactly"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Responsive video"
+    }
+  ]
+}
+{% endschema %}

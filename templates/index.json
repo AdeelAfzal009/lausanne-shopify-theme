@@ -1,0 +1,398 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "image_banner": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_kjaqcC": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "Unveiling the Iconic",
+            "heading_size": "h1"
+          }
+        },
+        "text_KgXj8N": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p>From Jewelry to Timeless Icon, Lausanne blends unmatched exclusivity, legacy craftsmanship, and one-of-a-kind aesthetics.</p>",
+            "text_style": "body"
+          }
+        },
+        "buttons_EUNY9T": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "SHOP LAUSANNE",
+            "button_link_1": "shopify://collections/jewelery",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_kjaqcC",
+        "text_KgXj8N",
+        "buttons_EUNY9T"
+      ],
+      "custom_css": [
+        "@media screen and (max-width: 749px) {.banner__box {top: 40%; }}",
+        ".banner__buttons {border: 1px solid #ffffff;}",
+        "a.button {color: #ffffff !important;}"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/web_banner_1.jpg",
+        "mobile_image": "shopify://shop_images/web_banner_1_mbl.jpg",
+        "image_overlay_opacity": 10,
+        "image_height": "adapt",
+        "image_behavior": "none",
+        "desktop_content_position": "bottom-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": false,
+        "color_scheme": "scheme-f9275875-f69f-4046-a012-40b79b2e62f6",
+        "stack_images_on_mobile": false,
+        "mobile_content_alignment": "center",
+        "show_text_below": false
+      }
+    },
+    "collection_list_GDQgDL": {
+      "type": "collection-list",
+      "blocks": {
+        "featured_collection_UUhFhe": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "frontpage"
+          }
+        },
+        "featured_collection_fxw7ci": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "jewelery"
+          }
+        },
+        "featured_collection_6ahQCe": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "gift-for-her"
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_UUhFhe",
+        "featured_collection_fxw7ci",
+        "featured_collection_6ahQCe"
+      ],
+      "settings": {
+        "title": "Our Collections",
+        "desc": "Discover a variety of our pieces.",
+        "heading_size": "h1",
+        "image_ratio": "square",
+        "columns_desktop": 3,
+        "color_scheme": "",
+        "show_view_all": false,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 72,
+        "padding_bottom": 36
+      }
+    },
+    "image_banner_6aGjdF": {
+      "type": "image-banner",
+      "custom_css": [
+        ".banner {width: 93%; margin: 36px auto;}"
+      ],
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/web_banner_2.jpg",
+        "mobile_image": "shopify://shop_images/web_banner_2_mbl.jpg",
+        "image_overlay_opacity": 0,
+        "image_height": "adapt",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": false,
+        "color_scheme": "",
+        "stack_images_on_mobile": false,
+        "mobile_content_alignment": "center",
+        "show_text_below": false
+      }
+    },
+    "featured_collection_nAncVx": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "bangles",
+        "products_to_show": 3,
+        "title": "Lausanne Wonder Collection 2025",
+        "heading_size": "h1",
+        "description": "<p>Lausanne’s latest collection celebrates the art of metamorphosis, crafting gold jewelry that evolves with your every moment.</p>",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 3,
+        "enable_desktop_slider": false,
+        "full_width": true,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "scheme-f9275875-f69f-4046-a012-40b79b2e62f6",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "17702819622e6427f1": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_a435aa0_hrVrzm": {
+          "type": "ai_gen_block_a435aa0",
+          "settings": {
+            "desktop_video_url": "https://cdn.shopify.com/videos/c/o/v/84a74b81efd44ac885db137124eab5ea.mp4",
+            "mobile_video_url": "https://cdn.shopify.com/videos/c/o/v/84a74b81efd44ac885db137124eab5ea.mp4",
+            "autoplay": true,
+            "loop": true,
+            "muted": true,
+            "show_controls": true,
+            "background_color": "#000000"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_a435aa0_hrVrzm"
+      ],
+      "name": "Video Banner",
+      "settings": {}
+    },
+    "featured_collection_w6GkFg": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "all-in-one-jewelry-sets",
+        "products_to_show": 3,
+        "title": "Complete Gold Set – Perfectly Paired",
+        "heading_size": "h1",
+        "description": "<p>A perfect trio of necklace, earrings, and ring   crafted in pure gold for timeless elegance. <br/>Designed to shine together, this set brings harmony, sophistication, and effortless beauty to every occasion.</p>",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 3,
+        "enable_desktop_slider": false,
+        "full_width": true,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "scheme-f9275875-f69f-4046-a012-40b79b2e62f6",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "collection_list_i7YMwA": {
+      "type": "collection-list",
+      "blocks": {
+        "featured_collection_tbJRQy": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "gold-necklaces"
+          }
+        },
+        "featured_collection_CFicHA": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "gold-earrings"
+          }
+        },
+        "featured_collection_FeHWaV": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "rings"
+          }
+        },
+        "featured_collection_tgjG4C": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "bangles"
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_tbJRQy",
+        "featured_collection_CFicHA",
+        "featured_collection_FeHWaV",
+        "featured_collection_tgjG4C"
+      ],
+      "custom_css": [],
+      "name": "t:sections.collection-list.presets.name",
+      "settings": {
+        "title": "Shop by",
+        "desc": "For nearly two decades, Lausanne Jewellers® has been defined by the world’s finest gold and unmatched craftsmanship timeless signatures of the House’s enduring legacy.",
+        "heading_size": "h1",
+        "image_ratio": "adapt",
+        "columns_desktop": 4,
+        "color_scheme": "",
+        "show_view_all": false,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "image_banner_W87q3K": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_KTEUYj": {
+          "type": "heading",
+          "settings": {
+            "heading": "Book an Appointment",
+            "heading_size": "h2"
+          }
+        },
+        "text_cVgTCG": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Tailored just for you, our in-store and virtual appointments are designed to make your day easier.Whether you need help finding the perfect gift, celebrating an upcoming milestone or jewelry styling advice, we're here to help.</p>",
+            "text_style": "body"
+          }
+        },
+        "buttons_8z9X4A": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Book an Appointment",
+            "button_link_1": "shopify://pages/request-an-appointment",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_KTEUYj",
+        "text_cVgTCG",
+        "buttons_8z9X4A"
+      ],
+      "disabled": true,
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/Gift_Banner_green_copy.jpg",
+        "mobile_image": "shopify://shop_images/Gift_Banner_Green_mbl_copy.jpg",
+        "image_overlay_opacity": 0,
+        "image_height": "adapt",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-left",
+        "desktop_content_alignment": "center",
+        "show_text_box": false,
+        "color_scheme": "scheme-f9275875-f69f-4046-a012-40b79b2e62f6",
+        "stack_images_on_mobile": false,
+        "mobile_content_alignment": "center",
+        "show_text_below": false
+      }
+    },
+    "image_banner_qL9LAG": {
+      "type": "image-banner",
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/web_banner_3.jpg",
+        "mobile_image": "shopify://shop_images/web_banner_3_mbl.jpg",
+        "image_overlay_opacity": 0,
+        "image_height": "adapt",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": false,
+        "color_scheme": "",
+        "stack_images_on_mobile": false,
+        "mobile_content_alignment": "center",
+        "show_text_below": false
+      }
+    },
+    "multicolumn_NKf6rj": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_TQaUDY": {
+          "type": "column",
+          "settings": {
+            "title": "Delivery & Returns",
+            "text": "<p>Offered for all orders</p>",
+            "link_label": "LEARN MORE",
+            "link": "shopify://pages/return-exchange-policy"
+          }
+        },
+        "column_addT37": {
+          "type": "column",
+          "settings": {
+            "title": "Contact a personal advisor",
+            "text": "<p>Our personal advisors will be delighted to assist you at +971 42 259 888</p>",
+            "link_label": "CONTACT US",
+            "link": "shopify://pages/contact"
+          }
+        },
+        "column_kF7VAe": {
+          "type": "column",
+          "settings": {
+            "title": "Our services offered",
+            "text": "<p>Personalize, adjust or revive your creations</p>",
+            "link_label": "CARE AND SERVICES",
+            "link": "shopify://pages/lausanne-care-and-services"
+          }
+        }
+      },
+      "block_order": [
+        "column_TQaUDY",
+        "column_addT37",
+        "column_kF7VAe"
+      ],
+      "custom_css": [
+        "@media only screen and (max-width: 767px) {li.multicolumn-list__item.grid__item {background: #f5f5f5; }}"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "none",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "image_banner",
+    "collection_list_GDQgDL",
+    "image_banner_6aGjdF",
+    "featured_collection_nAncVx",
+    "17702819622e6427f1",
+    "featured_collection_w6GkFg",
+    "collection_list_i7YMwA",
+    "image_banner_W87q3K",
+    "image_banner_qL9LAG",
+    "multicolumn_NKf6rj"
+  ]
+}

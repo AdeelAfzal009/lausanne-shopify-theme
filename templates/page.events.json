@@ -1,0 +1,241 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "event_hero": {
+      "type": "event-hero-countdown",
+      "settings": {
+        "image": "shopify://shop_images/web_banner_copy_event.jpg",
+        "mobile_image": "shopify://shop_images/MBL_Banner_copy_event.jpg",
+        "overlay_opacity": 55,
+        "overlay_style": "gradient",
+        "overlay_direction": "100deg",
+        "section_height": "adapt",
+        "content_alignment": "left",
+        "mobile_content_position": "bottom",
+        "eyebrow": "Upcoming Event",
+        "heading": "JWS JEWELLERY & WATCH SHOW",
+        "subheading": "",
+        "description": "",
+        "event_dates": "11-15 November 2026",
+        "event_venue": "Halls 1-3, ADNEC Centre Abu Dhabi",
+        "show_countdown": true,
+        "event_date": "2026-11-11",
+        "event_time": "10:00",
+        "event_timezone": "+04:00",
+        "label_days": "Days",
+        "label_hours": "Hrs",
+        "label_minutes": "Mins",
+        "label_seconds": "Secs",
+        "countdown_aria_label": "Time remaining until the exhibition",
+        "expired_text": "The doors are open — join us now.",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "solid",
+        "button_text_color": "#1a1206",
+        "heading_font": "theme",
+        "accent_color": "#ffffff",
+        "text_color": "#ffffff",
+        "background_color": "#0a0a0a",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "event_moments": {
+      "type": "event-moments-slider",
+      "blocks": {
+        "event_P4WrjG": {
+          "type": "event",
+          "settings": {
+            "media_type": "video",
+            "video": "shopify://files/videos/WhatsApp Video 2026-08-05 at 8.38.49 AM.mp4",
+            "video_url": "",
+            "event_date": "June 2026",
+            "event_name": "WJS",
+            "event_venue": "WJS, Sharjah",
+            "link": ""
+          }
+        },
+        "event_Xyd7WR": {
+          "type": "event",
+          "settings": {
+            "media_type": "video",
+            "image": "shopify://shop_images/Screenshot_2026-08-06_at_5.13.35_PM.png",
+            "video": "shopify://files/videos/WhatsApp Video 2026-08-05 at 8.38.48 AM.mp4",
+            "video_url": "",
+            "event_date": "2026",
+            "event_name": "Team Lausanne Jewellers",
+            "event_venue": "Dubai Games , Dubai",
+            "link": ""
+          }
+        },
+        "event_WmFwWb": {
+          "type": "event",
+          "settings": {
+            "media_type": "video",
+            "video": "shopify://files/videos/IMG_9225.MP4",
+            "video_url": "",
+            "event_date": "30 September - 4 October 2026",
+            "event_name": "WJS WATCH & JEWELLERY MIDDLE EAST SHOW",
+            "event_venue": "Expo Centre Sharjah",
+            "link": ""
+          }
+        },
+        "event_yHiXkm": {
+          "type": "event",
+          "disabled": true,
+          "settings": {
+            "media_type": "image",
+            "image": "shopify://shop_images/WhatsApp_Image_2026-08-06_at_11.21.47_AM_2.jpg",
+            "video_url": "",
+            "event_date": "June 2026",
+            "event_name": "WJS",
+            "event_venue": "WJS, Sharjah",
+            "link": ""
+          }
+        },
+        "moment_1": {
+          "type": "event",
+          "disabled": true,
+          "settings": {
+            "media_type": "image",
+            "image": "shopify://shop_images/WhatsApp_Image_2026-08-06_at_11.21.47_AM.jpg",
+            "video_url": "",
+            "event_date": "June 2026",
+            "event_name": "WJS",
+            "event_venue": "WJS, Sharjah",
+            "link": ""
+          }
+        },
+        "moment_2": {
+          "type": "event",
+          "disabled": true,
+          "settings": {
+            "media_type": "video",
+            "image": "shopify://shop_images/WhatsApp_Image_2026-08-06_at_11.21.46_AM.jpg",
+            "video_url": "",
+            "event_date": "June 2026",
+            "event_name": "WJS",
+            "event_venue": "WJS, Sharjah",
+            "link": ""
+          }
+        },
+        "moment_3": {
+          "type": "event",
+          "disabled": true,
+          "settings": {
+            "media_type": "image",
+            "image": "shopify://shop_images/WhatsApp_Image_2026-08-06_at_11.21.47_AM_1.jpg",
+            "video_url": "",
+            "event_date": "June 2026",
+            "event_name": "WJS",
+            "event_venue": "WJS, Sharjah",
+            "link": ""
+          }
+        },
+        "event_xUyQcX": {
+          "type": "event",
+          "disabled": true,
+          "settings": {
+            "media_type": "image",
+            "image": "shopify://shop_images/Screenshot_2026-08-16_at_12.02.04_AM.png",
+            "video_url": "",
+            "event_date": "",
+            "event_name": "",
+            "event_venue": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "event_P4WrjG",
+        "event_Xyd7WR",
+        "event_WmFwWb",
+        "event_yHiXkm",
+        "moment_1",
+        "moment_2",
+        "moment_3",
+        "event_xUyQcX"
+      ],
+      "settings": {
+        "eyebrow": "Past events",
+        "heading": "Moments That Sparkle",
+        "show_ornament": false,
+        "card_ratio": "portrait",
+        "columns_desktop": "3",
+        "columns_tablet": "2",
+        "columns_mobile": "1",
+        "card_gap": 24,
+        "card_overlay_color": "#000000",
+        "card_overlay_opacity": 85,
+        "card_overlay_height": 45,
+        "card_text_color": "#ffffff",
+        "show_arrows": true,
+        "show_dots": false,
+        "enable_autoplay": false,
+        "autoplay_speed": 6,
+        "heading_font": "theme",
+        "accent_color": "#000000",
+        "text_color": "#000000",
+        "background_color": "#ffffff",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "event_register": {
+      "type": "event-register-interest",
+      "disabled": true,
+      "settings": {
+        "layout": "form",
+        "emblem_type": "none",
+        "monogram": "L",
+        "emblem_image": "shopify://shop_images/icon.png",
+        "emblem_width": 72,
+        "heading": "Be Part of the Next Extraordinary Event",
+        "text": "<p>Register now to receive exclusive invitations and event updates.</p>",
+        "button_label": "Register your interest",
+        "button_link": "",
+        "button_style": "solid",
+        "button_text_color": "#ffffff",
+        "event_name": "Brilliance Unveiled",
+        "enquiry_label": "Event interest",
+        "show_phone": true,
+        "show_guests": true,
+        "show_message": true,
+        "label_name": "Full name",
+        "label_email": "Email address",
+        "label_phone": "Phone number",
+        "label_guests": "Number of guests",
+        "label_message": "Message",
+        "success_message": "Thank you. Your interest has been registered — we will be in touch with your invitation.",
+        "heading_font": "theme",
+        "accent_color": "#000000",
+        "text_color": "#000000",
+        "background_color": "#ffffff",
+        "padding_top": 40,
+        "padding_bottom": 48
+      }
+    }
+  },
+  "order": [
+    "main",
+    "event_hero",
+    "event_moments",
+    "event_register"
+  ]
+}

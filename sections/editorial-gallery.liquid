@@ -1,0 +1,367 @@
+{%- comment -%}
+  Editorial gallery — a grid of photo shoots, styled to match the events
+  pages (section-events.css / events.js) without the video/countdown
+  machinery those sections carry.
+
+  This section is intentionally STATIC rather than block-driven: the client
+  has 14 shoots / 300+ photos, far past what Shopify's per-block settings
+  can sanely hold (this originally used 8, then 35, image_picker fields per
+  block before that became unworkable). The shoot list below is generated
+  from the "final out (web)/" folder in the theme directory and points
+  directly at Shopify CDN file URLs — the photos are uploaded to Settings →
+  Files by hand (no app/API access is available for this project), using
+  the exact filenames Shopify produces from the originals (spaces become
+  underscores; everything else is left as-is).
+
+  To add or change a shoot: edit `gallery_shoots_data` below. Each shoot is
+  "Name::file1.jpg,file2.jpg,...", shoots separated by ";;". The first file
+  listed is used as the grid thumbnail. If a photo 404s on the live site,
+  it almost always means the uploaded file's name doesn't exactly match
+  what's listed here (Shopify appends "_1" etc. to duplicate filenames) —
+  check Settings → Files for the actual name Shopify gave it.
+{%- endcomment -%}
+{{ 'section-events.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'events.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign s = section.settings
+
+  case s.tile_ratio
+    when 'portrait'
+      assign ratio = '3 / 4'
+    when 'tall'
+      assign ratio = '2 / 3'
+    when 'square'
+      assign ratio = '1 / 1'
+    when 'landscape'
+      assign ratio = '4 / 3'
+    else
+      assign ratio = '3 / 4'
+  endcase
+
+  assign gallery_cdn_base = 'https://cdn.shopify.com/s/files/1/0704/4936/5144/files/'
+
+  assign gallery_shoots_data = 'Egypt Lion::set_1-01.jpg,set_1-02.jpg,set_1-03.jpg,set_1-04.jpg,set_1-05.jpg,set_1-06.jpg,set_1-07.jpg,set_1-08.jpg,set_1-09.jpg,set_1-10.jpg,set_1-030.jpg;;Temple::set_8-01.jpg,set_8-02.jpg,set_8-03.jpg,set_8-04.jpg,set_8-05.jpg,set_8-06.jpg,set_8-07.jpg,set_8-08.jpg,set_8-09.jpg,set_8-10.jpg,set_8-11.jpg,set_8-12.jpg,set_8-13.jpg,set_8-14.jpg,set_8-15.jpg,set_8-16.jpg,set_8-17.jpg,set_8-18.jpg,set_8-19.jpg,set_8-20.jpg,set_8-21.jpg,set_8-22.jpg,set_8-23.jpg,set_8-24.jpg,set_8-25.jpg,set_8-26.jpg;;Cherry Blossom::set_5-2.jpg,set_5-3.jpg,set_5-5.jpg,set_5-06.jpg,set_5-07.jpg,set_5-09.jpg,set_5-10.jpg,set_5-11.jpg,set_5-12.jpg,set_5-14.jpg,set_5-15.jpg,set_5-16.jpg,set_5-17.jpg,set_5-18.jpg,set_5-22.jpg,set_5-24.jpg,set_5-25.jpg,set_5-26.jpg,set_5-29.jpg,set_5.jpg;;Giant Piano::set_9-1.jpg,set_9-2.jpg,set_9-3.jpg,set_9-4.jpg,set_9-5.jpg,set_9-6.jpg,set_9-7.jpg,set_9-8.jpg,set_9-9.jpg,set_9-10.jpg,set_9-11.jpg,set_9-12.jpg,set_9-13.jpg,set_9-14.jpg,set_9-15.jpg,set_9-16.jpg,set_9-17.jpg,set_9-18.jpg,set_9-19.jpg,set_9-20.jpg,set_9-21.jpg,set_9-22.jpg;;Iceland::set_7_-01.jpg,set_7_-02.jpg,set_7_-03.jpg,set_7_-04.jpg,set_7_-05.jpg,set_7_-06.jpg,set_7_-07.jpg,set_7_-08.jpg,set_7_-09.jpg,set_7_-10.jpg,set_7_-11.jpg,set_7_-12.jpg,set_7_-13.jpg,set_7_-14.jpg,set_7_-15.jpg,set_7_-16.jpg,set_7_-17.jpg,set_7_-18.jpg,set_7_-19.jpg,set_7_-20.jpg,set_7_-21.jpg,set_7_-22.jpg,set_7_-23.jpg,set_7_-24.jpg,set_7_-25.jpg,set_7_-26.jpg,set_7_-27.jpg,set_7_-28.jpg,set_7_-29.jpg,set_7_-30.jpg,set_7_-31.jpg,set_7_-32.jpg,set_7_-33.jpg,set_7_-34.jpg,set_7_-35.jpg,set_7_-36.jpg,set_7_-37.jpg,set_7_-38.jpg,set_7_-39.jpg,set_7_-40.jpg,set_7_-41.jpg,set_7_-42.jpg,set_7_-43.jpg,set_7_-44.jpg,set_7_-45.jpg,set_7_-46.jpg,set_7_-47.jpg;;Lake of Swans::lake_of_swans-2.jpg,lake_of_swans-3.jpg,lake_of_swans-4.jpg,lake_of_swans-5.jpg,lake_of_swans-6.jpg,lake_of_swans-7.jpg,lake_of_swans-8.jpg,lake_of_swans-9.jpg,lake_of_swans-10.jpg,lake_of_swans-11.jpg,lake_of_swans-12.jpg,lake_of_swans-13.jpg,lake_of_swans-14.jpg,lake_of_swans-15.jpg,lake_of_swans-16.jpg,lake_of_swans-17.jpg,lake_of_swans-18.jpg,lake_of_swans-19.jpg,lake_of_swans-20.jpg,lake_of_swans-21.jpg,lake_of_swans-22.jpg,lake_of_swans-23.jpg,lake_of_swans.jpg;;Lotus::set_2-01.jpg,set_2-02.jpg,set_2-04.jpg,set_2-05.jpg,set_2-06.jpg,set_2-07.jpg,set_2-08.jpg,set_2-09.jpg,set_2-10.jpg,set_2-12.jpg,set_2-13.jpg,set_2-14.jpg,set_2-15.jpg;;Namibia Desert & White Horse::set_3-1.jpg,set_3-2.jpg,set_3-3.jpg,set_3-5.jpg,set_3-6.jpg,set_3-7.jpg,set_3-8.jpg,set_3-9.jpg,set_3-10.jpg,set_3-11.jpg,set_3-12.jpg,set_3-13.jpg,set_3-14.jpg,set_3-15.jpg,set_3-16.jpg,set_3-17.jpg,set_3-18.jpg,set_3-19.jpg;;Red Carpet::red_carpet-2.jpg,red_carpet-3.jpg,red_carpet-4.jpg,red_carpet-5.jpg,red_carpet-6.jpg,red_carpet-7.jpg,red_carpet-8.jpg,red_carpet-9.jpg,red_carpet-10.jpg,red_carpet-11.jpg,red_carpet.jpg;;Golden Fronds::set_4-03.jpg,set_4-05.jpg,set_4-08.jpg,set_4-09.jpg,set_4-13.jpg,set_4-14.jpg,set_4-15.jpg,set_4-16.jpg,set_4-17.jpg,set_4-18.jpg,set_4-19.jpg,set_4-21.jpg,set_4-22.jpg,set_4-23.jpg,set_4-24.jpg,set_4-25.jpg,set_4-26.jpg,set_4-27.jpg,set_4-28.jpg,set_4-29.jpg,set_4-30.jpg,set_4-31.jpg,set_4-33.jpg;;The Flower Garden::the_flower_garden-2-2.jpg,the_flower_garden-2.jpg,the_flower_garden-3-2.jpg,the_flower_garden-3.jpg,the_flower_garden-4-2.jpg,the_flower_garden-4.jpg,the_flower_garden-5.jpg,the_flower_garden-6.jpg,the_flower_garden-7.jpg,the_flower_garden-8.jpg,the_flower_garden-9.jpg,the_flower_garden-10.jpg,the_flower_garden-11.jpg,the_flower_garden-12.jpg,the_flower_garden-13.jpg,the_flower_garden-14.jpg,the_flower_garden-15.jpg,the_flower_garden-16.jpg,the_flower_garden-17.jpg,the_flower_garden-18.jpg,the_flower_garden-19.jpg,the_flower_garden-20.jpg,the_flower_garden.jpg;;The Red Desert and the Dolphin::the_red_desert_and_the_dolphin-2.jpg,the_red_desert_and_the_dolphin-3.jpg,the_red_desert_and_the_dolphin-4.jpg,the_red_desert_and_the_dolphin-5.jpg,the_red_desert_and_the_dolphin-6.jpg,the_red_desert_and_the_dolphin-7.jpg,the_red_desert_and_the_dolphin-8.jpg,the_red_desert_and_the_dolphin-9.jpg,the_red_desert_and_the_dolphin-10.jpg,the_red_desert_and_the_dolphin-11.jpg,the_red_desert_and_the_dolphin-12.jpg,the_red_desert_and_the_dolphin-13.jpg,the_red_desert_and_the_dolphin-14.jpg,the_red_desert_and_the_dolphin-15.jpg,the_red_desert_and_the_dolphin-16.jpg,the_red_desert_and_the_dolphin-17.jpg,the_red_desert_and_the_dolphin-18.jpg,the_red_desert_and_the_dolphin-19.jpg,the_red_desert_and_the_dolphin-20.jpg,the_red_desert_and_the_dolphin-21.jpg,the_red_desert_and_the_dolphin.jpg;;Vintage Car::vintage_car-2.jpg,vintage_car-3.jpg,vintage_car-4.jpg,vintage_car-5.jpg,vintage_car-6.jpg,vintage_car-7.jpg,vintage_car-8.jpg,vintage_car-9.jpg,vintage_car-10.jpg,vintage_car-11.jpg,vintage_car-12.jpg,vintage_car-13.jpg,vintage_car-14.jpg,vintage_car-15.jpg,vintage_car-16.jpg,vintage_car-17.jpg,vintage_car-18.jpg,vintage_car-19.jpg,vintage_car-20.jpg,vintage_car-21.jpg,vintage_car-22.jpg,vintage_car-23.jpg,vintage_car-24.jpg,vintage_car-25.jpg,vintage_car-26.jpg,vintage_car-27.jpg,vintage_car-28.jpg,vintage_car.jpg;;Waterfalls::water_falls-2.jpg,water_falls-3.jpg,water_falls-4.jpg,water_falls-5.jpg,water_falls-6.jpg,water_falls-7.jpg,water_falls-8.jpg,water_falls-9.jpg,water_falls-10.jpg,water_falls-11.jpg,water_falls-12.jpg,water_falls-13.jpg,water_falls-14.jpg,water_falls-15.jpg,water_falls-16.jpg,water_falls-17.jpg,water_falls-18.jpg,water_falls-19.jpg,water_falls-20.jpg,water_falls-21.jpg,water_falls-22.jpg,water_falls.jpg;;Paris Autumn::Paris_autumn-2.jpg,Paris_autumn-3.jpg,Paris_autumn-4.jpg,Paris_autumn-5.jpg,Paris_autumn-6.jpg,Paris_autumn-7.jpg,Paris_autumn-8.jpg,Paris_autumn-9.jpg,Paris_autumn-10.jpg,Paris_autumn-11.jpg;;Horse-Drawn Carriage::horse_drawn_carriage-2.jpg,horse_drawn_carriage-3.jpg,horse_drawn_carriage-4.jpg,horse_drawn_carriage-5.jpg,horse_drawn_carriage-6.jpg,horse_drawn_carriage-7.jpg,horse_drawn_carriage-8.jpg,horse_drawn_carriage-9.jpg,horse_drawn_carriage-10.jpg,horse_drawn_carriage-11.jpg,horse_drawn_carriage-12.jpg,horse_drawn_carriage-13.jpg,horse_drawn_carriage-14.jpg,horse_drawn_carriage-15.jpg,horse_drawn_carriage-16.jpg,horse_drawn_carriage-17.jpg,horse_drawn_carriage-18.jpg,horse_drawn_carriage-19.jpg,horse_drawn_carriage-20.jpg,horse_drawn_carriage-21.jpg;;Miracle Garden::miracle_Garden-2.jpg,miracle_Garden-3.jpg,miracle_Garden-4.jpg,miracle_Garden-5.jpg,miracle_Garden-6.jpg,miracle_Garden-7.jpg,miracle_Garden-8.jpg,miracle_Garden-9.jpg,miracle_Garden-10.jpg,miracle_Garden-11.jpg,miracle_Garden-12.jpg,miracle_Garden-13.jpg,miracle_Garden.jpg;;Winter Bridge::The_bridge-2.jpg,The_bridge-3.jpg,The_bridge-4.jpg,The_bridge-5.jpg,The_bridge-6.jpg,The_bridge-7.jpg,The_bridge-9.jpg,The_bridge-10.jpg,The_bridge-11.jpg,The_bridge-12.jpg,The_bridge-13.jpg,The_bridge-14.jpg,The_bridge-15.jpg,The_bridge-16.jpg,The_bridge-17.jpg,The_bridge-18.jpg,The_bridge-19.jpg,The_bridge-20.jpg,The_bridge-21.jpg,The_bridge.jpg;;Winter Snow Train::winter_snow_train-2.jpg,winter_snow_train-3.jpg,winter_snow_train-4.jpg,winter_snow_train-5.jpg,winter_snow_train-6.jpg,winter_snow_train-7.jpg,winter_snow_train-8.jpg,winter_snow_train-9.jpg,winter_snow_train-10.jpg,winter_snow_train-11.jpg,winter_snow_train-12.jpg,winter_snow_train-13.jpg,winter_snow_train-14.jpg,winter_snow_train-15.jpg,winter_snow_train-16.jpg,winter_snow_train.jpg;;Old Temple::old_temple_-2.jpg,old_temple_-3.jpg,old_temple_-4.jpg,old_temple_-5.jpg,old_temple_-6.jpg,old_temple_-7.jpg,old_temple_-8.jpg,old_temple_-9.jpg,old_temple_-10.jpg,old_temple_-11.jpg,old_temple.jpg;;Hill Top::hill_top-01.jpg,hill_top-02.jpg,hill_top-03.jpg,hill_top-04.jpg,hill_top-05.jpg,hill_top-06.jpg,hill_top-07.jpg,hill_top-08.jpg,hill_top-09.jpg,hill_top-10.jpg,hill_top-11.jpg,hill_top-12.jpg,hill_top-13.jpg,hill_top-14.jpg;;Lotus Pond::lotus_pond-01.jpg,lotus_pond-02.jpg,lotus_pond-03.jpg,lotus_pond-04.jpg,lotus_pond-05.jpg,lotus_pond-06.jpg,lotus_pond-07.jpg,lotus_pond-08.jpg,lotus_pond-09.jpg,lotus_pond-10.jpg,lotus_pond-11.jpg,lotus_pond-12.jpg,lotus_pond-13.jpg,lotus_pond-14.jpg,lotus_pond-15.jpg,lotus_pond-16.jpg;;Phoenix::phoenix-01.jpg,phoenix-02.jpg,phoenix-03.jpg,phoenix-04.jpg,phoenix-05.jpg,phoenix-06.jpg,phoenix-07.jpg,phoenix-08.jpg,phoenix-09.jpg,phoenix-10.jpg,phoenix-11.jpg,phoenix-12.jpg,phoenix-13.jpg;;Arabian Land::Arabian_land-2.jpg,Arabian_land-3.jpg,Arabian_land-4.jpg,Arabian_land-5.jpg,Arabian_land-6.jpg,Arabian_land-7.jpg,Arabian_land-8.jpg,Arabian_land-9.jpg,Arabian_land-10.jpg,Arabian_land-11.jpg,Arabian_land-12.jpg,Arabian_land-13.jpg,Arabian_land-14.jpg,Arabian_land-15.jpg,Arabian_land-16.jpg,Arabian_land-17.jpg,Arabian_land.jpg;;Golden Volcano::golden_volcano-2.jpg,golden_volcano-3.jpg,golden_volcano-4.jpg,golden_volcano-5.jpg,golden_volcano-6.jpg,golden_volcano-7.jpg,golden_volcano-8.jpg,golden_volcano-9.jpg,golden_volcano-10.jpg,golden_volcano-11.jpg,golden_volcano-12.jpg,golden_volcano.jpg;;Lantern Festival::lantern_festival-2.jpg,lantern_festival-3.jpg,lantern_festival-4.jpg,lantern_festival-5.jpg,lantern_festival-6.jpg,lantern_festival-7.jpg,lantern_festival-8.jpg,lantern_festival-9.jpg,lantern_festival-10.jpg,lantern_festival-11.jpg,lantern_festival-12.jpg,lantern_festival-13.jpg,lantern_festival-14.jpg,lantern_festival-15.jpg,lantern_festival-16.jpg,lantern_festival-17.jpg,lantern_festival-18.jpg,lantern_festival-19.jpg,lantern_festival-20.jpg,lantern_festival-21.jpg,lantern_festival-22.jpg,lantern_festival-23.jpg,lantern_festival.jpg;;Tuskar::tuskar-2.jpg,tuskar-3.jpg,tuskar-4.jpg,tuskar-5.jpg,tuskar-6.jpg,tuskar-7.jpg,tuskar-8.jpg,tuskar-9.jpg,tuskar-10.jpg,tuskar.jpg'
+
+  assign gallery_shoots = gallery_shoots_data | split: ';;'
+-%}
+
+{%- style -%}
+  #EditorialGallery-{{ section.id }} {
+    --events-accent: {{ s.accent_color }};
+    --events-text: {{ s.text_color }};
+    --events-muted: {{ s.text_color | color_modify: 'alpha', 0.62 }};
+    --events-bg: {{ s.background_color }};
+    --events-hairline: {{ s.text_color | color_modify: 'alpha', 0.16 }};
+    --gallery-ratio: {{ ratio }};
+    --gallery-gap: {{ s.tile_gap }}px;
+    --gallery-columns: {{ s.columns_desktop }};
+    --gallery-columns-tablet: {{ s.columns_tablet }};
+    --gallery-columns-mobile: {{ s.columns_mobile }};
+  }
+
+  #EditorialGallery-{{ section.id }} .editorial-gallery {
+    padding-top: {{ s.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ s.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    #EditorialGallery-{{ section.id }} .editorial-gallery {
+      padding-top: {{ s.padding_top }}px;
+      padding-bottom: {{ s.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div
+  id="EditorialGallery-{{ section.id }}"
+  class="events-section{% if s.heading_font == 'theme' %} events-section--theme-font{% endif %}"
+>
+  <div class="editorial-gallery page-width">
+    {%- if s.eyebrow != blank or s.heading != blank -%}
+      <div class="editorial-gallery__header">
+        {%- if s.eyebrow != blank -%}
+          <p class="events-eyebrow">{{ s.eyebrow | escape }}</p>
+        {%- endif -%}
+        {%- if s.heading != blank -%}
+          <h2 class="events-heading editorial-gallery__heading">{{ s.heading }}</h2>
+        {%- endif -%}
+        {%- if s.show_ornament -%}
+          <div class="events-ornament" aria-hidden="true"><span></span></div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if gallery_shoots.size > 0 -%}
+      <editorial-gallery>
+        <div class="editorial-gallery__grid">
+          {%- for shoot_raw in gallery_shoots -%}
+            {%- liquid
+              assign shoot_parts = shoot_raw | split: '::'
+              assign shoot_name = shoot_parts[0]
+              assign shoot_files = shoot_parts[1] | split: ','
+              assign cover_url = gallery_cdn_base | append: shoot_files[0] | append: '?width=800'
+            -%}
+
+            <button
+              type="button"
+              class="editorial-gallery__item"
+              data-gallery-item
+              aria-label="{{ 'View the' | append: ' ' | append: shoot_name | append: ' shoot in full screen' | escape }}"
+            >
+              <img
+                class="editorial-gallery__img"
+                src="{{ cover_url }}"
+                srcset="{{ gallery_cdn_base | append: shoot_files[0] }}?width=400 400w, {{ gallery_cdn_base | append: shoot_files[0] }}?width=800 800w, {{ gallery_cdn_base | append: shoot_files[0] }}?width=1200 1200w"
+                sizes="(min-width: 990px) 25vw, (min-width: 750px) 33vw, 50vw"
+                loading="lazy"
+                alt="{{ shoot_name | escape }}"
+                width="800"
+                height="1067"
+              >
+
+              <div class="editorial-gallery__scrim" aria-hidden="true"></div>
+              <div class="editorial-gallery__info">
+                <h3 class="editorial-gallery__name">{{ shoot_name | escape }}</h3>
+              </div>
+
+              <span class="editorial-gallery__zoom" aria-hidden="true">
+                <svg viewBox="0 0 20 20" focusable="false">
+                  <circle cx="8.5" cy="8.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.4" />
+                  <path d="M13.4 13.4L18 18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+                  <path d="M8.5 5.8v5.4M5.8 8.5h5.4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
+                </svg>
+              </span>
+              <script type="application/json" data-gallery-images>
+                [
+                  {%- for file in shoot_files -%}
+                    {%- unless forloop.first -%},{%- endunless -%}
+                    {"src": {{ gallery_cdn_base | append: file | append: '?width=2200' | json }}, "alt": {{ shoot_name | json }}}
+                  {%- endfor -%}
+                ]
+              </script>
+            </button>
+          {%- endfor -%}
+        </div>
+
+        {%- comment -%}
+          Three steps, not two: shoot tile -> a fast-loading grid of that
+          shoot's own thumbnails -> full-screen slider only once a specific
+          photo is picked. Jumping straight from the tile to a full-size
+          (2200px) image, as this used to, was the slow part; a grid of small
+          thumbnails is the same technique already used for the page grid.
+        {%- endcomment -%}
+        <div class="gallery-lightbox" data-gallery-lightbox hidden>
+          <div class="gallery-lightbox__backdrop" data-gallery-lightbox-dismiss></div>
+
+          <div class="gallery-lightbox__grid-wrap" data-gallery-lightbox-grid-wrap hidden>
+            <div class="gallery-lightbox__grid-header">
+              <h3 class="gallery-lightbox__grid-title" data-gallery-lightbox-grid-title></h3>
+              <p class="gallery-lightbox__grid-count" data-gallery-lightbox-grid-count></p>
+            </div>
+            <div class="gallery-lightbox__grid" data-gallery-lightbox-grid></div>
+          </div>
+
+          <div class="gallery-lightbox__stage" data-gallery-lightbox-stage hidden>
+            <img class="gallery-lightbox__image" data-gallery-lightbox-image alt="" />
+          </div>
+          <button
+            type="button"
+            class="gallery-lightbox__arrow gallery-lightbox__arrow--prev"
+            data-gallery-lightbox-prev
+            aria-label="{{ 'general.slider.previous_slide' | t }}"
+            hidden
+          >
+            <svg viewBox="0 0 12 20" aria-hidden="true" focusable="false">
+              <path d="M10 1L2 10l8 9" fill="none" stroke="currentColor" stroke-width="1.5" />
+            </svg>
+          </button>
+          <button
+            type="button"
+            class="gallery-lightbox__arrow gallery-lightbox__arrow--next"
+            data-gallery-lightbox-next
+            aria-label="{{ 'general.slider.next_slide' | t }}"
+            hidden
+          >
+            <svg viewBox="0 0 12 20" aria-hidden="true" focusable="false">
+              <path d="M2 1l8 9-8 9" fill="none" stroke="currentColor" stroke-width="1.5" />
+            </svg>
+          </button>
+          <p class="gallery-lightbox__counter" data-gallery-lightbox-counter aria-live="polite" hidden></p>
+          <button
+            type="button"
+            class="gallery-lightbox__back"
+            data-gallery-lightbox-back
+            aria-label="Back to all photos in this shoot"
+            hidden
+          >
+            <svg viewBox="0 0 12 20" aria-hidden="true" focusable="false">
+              <path d="M10 1L2 10l8 9" fill="none" stroke="currentColor" stroke-width="1.5" />
+            </svg>
+          </button>
+          <button
+            type="button"
+            class="gallery-lightbox__close"
+            data-gallery-lightbox-dismiss
+            aria-label="{{ 'accessibility.close' | t | default: 'Close' }}"
+          >
+            <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false" stroke="currentColor" stroke-width="1.4" fill="none">
+              <path d="M2 2l12 12M14 2L2 14" />
+            </svg>
+          </button>
+        </div>
+      </editorial-gallery>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Editorial gallery",
+  "tag": "section",
+  "class": "section-editorial-gallery",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Label above heading",
+      "default": "Editorial"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shoots"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_ornament",
+      "label": "Show diamond divider",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "tile_ratio",
+      "label": "Tile shape",
+      "options": [
+        { "value": "tall", "label": "Tall (2:3)" },
+        { "value": "portrait", "label": "Portrait (3:4)" },
+        { "value": "square", "label": "Square (1:1)" },
+        { "value": "landscape", "label": "Landscape (4:3)" }
+      ],
+      "default": "portrait"
+    },
+    {
+      "type": "select",
+      "id": "columns_desktop",
+      "label": "Columns on desktop",
+      "options": [
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" },
+        { "value": "5", "label": "5" }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "select",
+      "id": "columns_tablet",
+      "label": "Columns on tablet",
+      "options": [
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" }
+      ],
+      "default": "3"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "range",
+      "id": "tile_gap",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Space between photos",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Colours & type"
+    },
+    {
+      "type": "select",
+      "id": "heading_font",
+      "label": "Heading font",
+      "options": [
+        { "value": "serif", "label": "Elegant serif" },
+        { "value": "theme", "label": "Theme heading font" }
+      ],
+      "default": "serif"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent colour",
+      "default": "#c6a15b"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text colour",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background colour",
+      "default": "#0a0a0a"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 88
+    }
+  ],
+  "presets": [
+    {
+      "name": "Editorial gallery",
+      "category": "Events"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,167 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "two_column_policy_info_7nCXXm": {
+      "type": "two-column-policy-info",
+      "blocks": {
+        "collapsible_row_Vbcjaa": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "1. Data Controller",
+            "icon": "none",
+            "row_content": "<p>Lausanne Jewellers® LLC<br/>Registered in the United Arab Emirates<br/>Email: <strong>Lausanne@lausanne.ae</strong><br/><strong>Landline:</strong> 042259888<br/><strong>Mobile:</strong> +971 50 600 5514</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_FKdenh": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "2. Types of Data We May Collect",
+            "icon": "none",
+            "row_content": "<p>We may collect and process the following categories of personal data:</p><ul><li><strong>Identification Data</strong>: Full name, title, date of birth</li><li><strong>Contact Information</strong>: Email address, phone number, billing and delivery addresses</li><li><strong>Transaction Data</strong>: Purchase history, payment details (processed securely via third parties)</li><li><strong>Preference Data</strong>: Wishlist items, marketing preferences</li><li><strong>Technical Data</strong>: IP address, browser type, device information, cookies, usage data</li></ul><p>We collect this data when you interact with our website, make a purchase, subscribe to our communications, or contact our customer service.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_YyTXxR": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "3. Use of Your Personal Data",
+            "icon": "none",
+            "row_content": "<p>Your personal data is processed to:</p><ul><li>Fulfill your orders and manage transactions</li><li>Provide customer support and respond to your requests</li><li>Enhance your online experience and personalize content</li><li>Send updates, invitations, or promotional offers (subject to your consent)</li><li>Comply with our legal and regulatory obligations</li></ul><p>We rely on lawful bases such as contract performance, legitimate interest, and legal compliance when processing your data.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_ALr8Eh": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "4. Data Sharing and Disclosure",
+            "icon": "none",
+            "row_content": "<p>We may share your personal data with:</p><ul><li><strong>Authorized service providers</strong> for payment processing, logistics, and IT support</li><li><strong>Marketing and analytics partners</strong>, strictly under confidentiality obligations</li><li><strong>Regulatory or legal authorities</strong>, when required by UAE law or court order</li></ul><p>We do <strong>not</strong> sell your data under any circumstances.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_jrczBV": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "5. International Transfers",
+            "icon": "none",
+            "row_content": "<p>Some of our service providers may be located outside the UAE. In such cases, we ensure your data is transferred securely, in accordance with applicable data protection standards and contractual safeguards.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_aXDWaM": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "6. Data Retention",
+            "icon": "none",
+            "row_content": "<p>Your data is retained for a limited duration, necessary for:</p><ul><li>Completing transactions</li><li>Complying with legal and tax obligations</li><li>Resolving disputes and enforcing our terms</li></ul><p>After this period, your data is securely erased or anonymized.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_Ty7i68": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "7. Your Rights",
+            "icon": "none",
+            "row_content": "<p>In accordance with UAE data protection regulations, you may:</p><ul><li>Request access to your personal data</li><li>Rectify or update your data</li><li>Request erasure (subject to legal exceptions)</li><li>Object to marketing communications</li><li>Request data portability to another service provider</li></ul><p>You can exercise these rights by contacting us at <strong>Lausanne@lausanne.ae</strong></p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_cbg3Uw": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "8. Security Measures",
+            "icon": "none",
+            "row_content": "<p>We implement appropriate technical and organizational measures to protect your data, including:</p><ul><li>SSL encryption</li><li>Secure hosting infrastructure</li><li>Access restriction to authorized personnel only</li><li>Regular monitoring and threat assessments</li></ul><p>Despite these precautions, we encourage users to take steps to protect their online data.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_bw8paC": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "9. Cookies and Tracking Technologies",
+            "icon": "none",
+            "row_content": "<p>Our website uses cookies to enhance user experience and gather analytics. You can configure your browser to manage or disable cookies.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_KcnfWz": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "10. Children’s Privacy",
+            "icon": "none",
+            "row_content": "<p>Lausanne Jewellers® does not knowingly collect personal data from individuals under 13 years of age. If you believe a minor has provided us with data, please contact us for immediate removal.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_LnbcaT": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "11. Updates to This Policy",
+            "icon": "none",
+            "row_content": "<p>We may update this Privacy Policy to reflect changes in our practices or legal obligations. The updated version will be published on this page with the revision date.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_BFi3gz": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "12. Contact Information",
+            "icon": "none",
+            "row_content": "<p>For questions or concerns regarding this Privacy Policy, or to exercise your rights, please contact us:</p><p><strong>Lausanne Jewellers® (Head Office)</strong></p><p><strong>Email:</strong> Lausanne@lausanne.ae<br/><strong>Landline: </strong>042259888<br/><strong>Mobile:</strong> +971 50 600 5514<br/><strong>Business Address:</strong> Shop No. 1, Shamal building Al Khor street, Near Gold House building P.O. Box 1697, Dubai, UAE.</p><p><strong>Lausanne Jewellers® (Branch 2)</strong></p><p><strong>Email:</strong> Lausanne@lausanne.ae<br/><strong>Landline: </strong>042266256<br/><strong>Mobile: </strong>+971 50 454 7350<br/><strong>Business Address:</strong> Essa & Mohammed Ebrahim Lootah Building no 12, Shop No. 2 OPP Gold Centre building, near gate no 03, Gold souk Deira Dubai, UAE.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_Vbcjaa",
+        "collapsible_row_FKdenh",
+        "collapsible_row_YyTXxR",
+        "collapsible_row_ALr8Eh",
+        "collapsible_row_jrczBV",
+        "collapsible_row_aXDWaM",
+        "collapsible_row_Ty7i68",
+        "collapsible_row_cbg3Uw",
+        "collapsible_row_bw8paC",
+        "collapsible_row_KcnfWz",
+        "collapsible_row_LnbcaT",
+        "collapsible_row_BFi3gz"
+      ],
+      "settings": {
+        "caption": "",
+        "heading": "Privacy Policy",
+        "desc": "<p><strong>Effective Date: May, 2025</strong></p><p>Lausanne, operated by Lausanne Jewellers LLC (“<strong>Lausanne Jewellers®”, “we”, “us”, or “our”</strong>), is a registered entity in the United Arab Emirates with its principal place of business at Shop No. 1, Shamal building Al Khor street, Near Gold House building P.O. Box 1697, Dubai, UAE. Lausanne Jewelers values your trust and is committed to protecting your personal data. This Privacy Policy outlines how we collect, use, store, share, and safeguard your information in accordance with applicable data protection laws in the United Arab Emirates, including the Federal Decree <strong>Law No. 45 of 2021</strong> on the Protection of <strong>Personal Data (PDPL).</strong></p><p>By accessing our website or using our services, you acknowledge that you have read and understood this Privacy Policy.</p>",
+        "heading_size": "h1",
+        "heading_alignment": "left",
+        "layout": "row",
+        "container_color_scheme": "",
+        "color_scheme": "",
+        "open_first_collapsible_row": true,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main",
+    "two_column_policy_info_7nCXXm"
+  ]
+}

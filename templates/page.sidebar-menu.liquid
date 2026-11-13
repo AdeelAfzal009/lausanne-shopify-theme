@@ -1,0 +1,13 @@
+{% comment %} {% layout none %}
+<div class="sidebar-menu-container">
+  <h3>Menu</h3>
+  <ul>
+    {% for link in linklists.main-menu.links %}
+      <li class="sidebar-menu-item {% if link.links.size > 0 %}has-children{% endif %}">
+        <a href="{{ link.url }}" data-handle="{{ link.url | split: '/' | last }}">
+          {{ link.title }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</div> {% endcomment %}

@@ -1,0 +1,250 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "vendor": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "21K Gold - Weight (g): {{ product.metafields.custom.gold_weight.value }}",
+            "text_style": "body"
+          }
+        },
+        "custom_liquid_Pwh6Hr": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "21K Gold{% if product.metafields.custom.gold_weight != blank %} - Weight (g): {{ product.metafields.custom.gold_weight }} {% endif %}"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "custom_liquid_WX3P7H": {
+          "type": "custom_liquid",
+          "disabled": true,
+          "settings": {
+            "custom_liquid": "{% render 'tabby-installments'%}"
+          }
+        },
+        "text_9CJHHH": {
+          "type": "text",
+          "settings": {
+            "text": "<strong>Note:</strong> If you wish to pay using Tabby, please check the box on cart. A 7% Tabby processing fee will be added to your order. This fee is required to use Tabby as a payment method.",
+            "text_style": "uppercase"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "custom_liquid_bqUr9M": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<p style=\"color:#FF0000\">Due to the current situation in the region, we have temporarily paused online sales. We appreciate your understanding and look forward to serving you again soon.</p>"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "disabled": true,
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": false
+          }
+        },
+        "selleasy_lb_upsell_widget_ba_FqQyWN": {
+          "type": "shopify://apps/selleasy/blocks/lb-upsell-widget-ba/790c1a03-a71f-4bc1-9869-00dad526d3c2",
+          "settings": {}
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "contact_axt47i": {
+          "type": "contact",
+          "settings": {}
+        },
+        "collapsible_tab_wxLPt7": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Care & Services",
+            "icon": "serving_dish",
+            "content": "",
+            "page": "lausanne-care-and-services"
+          }
+        },
+        "collapsible_tab_yzBAip": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Travel, Delivery and Payments",
+            "icon": "lock",
+            "content": "",
+            "page": "travel-delivery-and-payments"
+          }
+        },
+        "share": {
+          "type": "share",
+          "disabled": true,
+          "settings": {
+            "share_label": "Share"
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "vendor",
+        "custom_liquid_Pwh6Hr",
+        "price",
+        "custom_liquid_WX3P7H",
+        "text_9CJHHH",
+        "variant_picker",
+        "quantity_selector",
+        "custom_liquid_bqUr9M",
+        "buy_buttons",
+        "selleasy_lb_upsell_widget_ba_FqQyWN",
+        "description",
+        "contact_axt47i",
+        "collapsible_tab_wxLPt7",
+        "collapsible_tab_yzBAip",
+        "share"
+      ],
+      "custom_css": [
+        ".product__text.caption-with-letter-spacing {text-transform: capitalize;}"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "stacked",
+        "mobile_thumbnails": "hide",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "Related Products",
+        "heading_size": "h2",
+        "products_to_show": 3,
+        "columns_desktop": 3,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 52,
+        "padding_bottom": 28
+      }
+    },
+    "image_banner_NMCWw9": {
+      "type": "image-banner",
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/web_banner_3.jpg",
+        "mobile_image": "shopify://shop_images/web_banner_3_mbl.jpg",
+        "image_overlay_opacity": 0,
+        "image_height": "adapt",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": false,
+        "color_scheme": "",
+        "stack_images_on_mobile": false,
+        "mobile_content_alignment": "center",
+        "show_text_below": false
+      }
+    },
+    "multicolumn_yWLpJU": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_Jr9wzh": {
+          "type": "column",
+          "settings": {
+            "title": "Delivery & Returns",
+            "text": "<p>Offered for all orders</p>",
+            "link_label": "LEARN MORE",
+            "link": "shopify://pages/return-exchange-policy"
+          }
+        },
+        "column_xCPFBE": {
+          "type": "column",
+          "settings": {
+            "title": "Contact a personal advisor",
+            "text": "<p>Our personal advisors will be delighted to assist you at +971 42 259 888</p>",
+            "link_label": "CONTACT US",
+            "link": "shopify://pages/contact"
+          }
+        },
+        "column_LtEFep": {
+          "type": "column",
+          "settings": {
+            "title": "Our services offered",
+            "text": "<p>Personalize, adjust or revive your creations</p>",
+            "link_label": "CARE AND SERVICES",
+            "link": "shopify://pages/lausanne-care-and-services"
+          }
+        }
+      },
+      "block_order": [
+        "column_Jr9wzh",
+        "column_xCPFBE",
+        "column_LtEFep"
+      ],
+      "custom_css": [
+        "@media only screen and (max-width: 767px) {li.multicolumn-list__item.grid__item {background: #f5f5f5; }}"
+      ],
+      "settings": {
+        "title": "",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "none",
+        "color_scheme": "",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main",
+    "related-products",
+    "image_banner_NMCWw9",
+    "multicolumn_yWLpJU"
+  ]
+}

@@ -1,0 +1,445 @@
+{{ 'section-events.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign s = section.settings
+  assign form_id = 'EventInterest-' | append: section.id
+-%}
+
+{%- style -%}
+  #EventRegister-{{ section.id }} {
+    --events-accent: {{ s.accent_color }};
+    --events-text: {{ s.text_color }};
+    --events-muted: {{ s.text_color | color_modify: 'alpha', 0.62 }};
+    --events-bg: {{ s.background_color }};
+    --events-hairline: {{ s.text_color | color_modify: 'alpha', 0.16 }};
+    --events-button-label: {{ s.button_text_color }};
+  }
+
+  #EventRegister-{{ section.id }} .event-register {
+    padding-top: {{ s.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ s.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    #EventRegister-{{ section.id }} .event-register {
+      padding-top: {{ s.padding_top }}px;
+      padding-bottom: {{ s.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div
+  id="EventRegister-{{ section.id }}"
+  class="events-section{% if s.heading_font == 'theme' %} events-section--theme-font{% endif %}"
+>
+  <div class="event-register page-width">
+    <div class="event-register__inner">
+      {%- if s.emblem_type == 'image' and s.emblem_image != blank -%}
+        {%- liquid
+          assign emblem_sizes = s.emblem_width | append: 'px'
+          assign emblem_style = 'width: ' | append: s.emblem_width | append: 'px;'
+          assign emblem_alt = s.emblem_image.alt | default: shop.name
+        -%}
+        <div class="event-register__emblem">
+          {{
+            s.emblem_image
+            | image_url: width: 320
+            | image_tag:
+              loading: 'lazy',
+              widths: '80, 160, 240, 320',
+              sizes: emblem_sizes,
+              style: emblem_style,
+              alt: emblem_alt
+          }}
+        </div>
+      {%- elsif s.emblem_type == 'monogram' -%}
+        <div class="event-register__emblem" aria-hidden="true">
+          <svg
+            width="{{ s.emblem_width }}"
+            height="{{ s.emblem_width }}"
+            viewBox="0 0 64 64"
+            fill="none"
+            stroke="currentColor"
+            focusable="false"
+          >
+            <rect x="14" y="14" width="36" height="36" stroke-width="1" />
+            <rect x="14" y="14" width="36" height="36" stroke-width="1" transform="rotate(45 32 32)" />
+            <circle cx="32" cy="32" r="18" stroke-width="1" />
+            <text
+              x="32"
+              y="32"
+              text-anchor="middle"
+              dominant-baseline="central"
+              stroke="none"
+              fill="currentColor"
+              font-size="18"
+              font-family="'Cormorant Garamond', 'Times New Roman', Georgia, serif"
+            >{{ s.monogram | escape }}</text>
+          </svg>
+        </div>
+      {%- endif -%}
+
+      {%- if s.heading != blank -%}
+        <h2 class="events-heading event-register__heading">{{ s.heading }}</h2>
+      {%- endif -%}
+
+      {%- if s.text != blank -%}
+        <div class="event-register__text rte">{{ s.text }}</div>
+      {%- endif -%}
+
+      {%- if s.layout == 'button' -%}
+        {%- if s.button_label != blank -%}
+          <div class="event-register__cta">
+            <a
+              href="{{ s.button_link | default: '#' }}"
+              class="events-button{% if s.button_style == 'outline' %} events-button--outline{% endif %}"
+            >
+              {{- s.button_label | escape -}}
+              <svg viewBox="0 0 10 10" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.2">
+                <path d="M3 1l4 4-4 4" />
+              </svg>
+            </a>
+          </div>
+        {%- endif -%}
+      {%- else -%}
+        {%- form 'contact', id: form_id, class: 'event-register__form' -%}
+          {%- if form.posted_successfully? -%}
+            <p class="event-register__message" tabindex="-1" autofocus>
+              {{ s.success_message | escape }}
+            </p>
+          {%- elsif form.errors -%}
+            <div class="event-register__message event-register__message--error" tabindex="-1" autofocus>
+              {{ 'templates.contact.form.error_heading' | t }}
+              <ul>
+                {%- for field in form.errors -%}
+                  <li>
+                    {%- if field == 'form' -%}
+                      {{ form.errors.messages[field] }}
+                    {%- else -%}
+                      {{ form.errors.translated_fields[field] | capitalize }}
+                      {{ form.errors.messages[field] }}
+                    {%- endif -%}
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- endif -%}
+
+          {%- comment -%} Tells the merchant which section the enquiry came from. {%- endcomment -%}
+          <input type="hidden" name="contact[Enquiry type]" value="{{ s.enquiry_label | escape }}">
+          {%- if s.event_name != blank -%}
+            <input type="hidden" name="contact[Event]" value="{{ s.event_name | escape }}">
+          {%- endif -%}
+
+          <div class="event-register__fields event-register__fields--split">
+            <div class="event-register__field">
+              <label for="{{ form_id }}-name">{{ s.label_name | escape }}</label>
+              <input
+                type="text"
+                id="{{ form_id }}-name"
+                name="contact[Name]"
+                autocomplete="name"
+                value="{{ form.name }}"
+                required
+              >
+            </div>
+
+            <div class="event-register__field">
+              <label for="{{ form_id }}-email">{{ s.label_email | escape }}</label>
+              <input
+                type="email"
+                id="{{ form_id }}-email"
+                name="contact[email]"
+                autocomplete="email"
+                spellcheck="false"
+                autocapitalize="off"
+                value="{{ form.email }}"
+                required
+                {% if form.errors contains 'email' %}
+                  aria-invalid="true"
+                {% endif %}
+              >
+            </div>
+
+            {%- if s.show_phone -%}
+              <div class="event-register__field">
+                <label for="{{ form_id }}-phone">{{ s.label_phone | escape }}</label>
+                <input
+                  type="tel"
+                  id="{{ form_id }}-phone"
+                  name="contact[Phone]"
+                  autocomplete="tel"
+                  pattern="[0-9\-\+\s\(\)]*"
+                  value="{{ form.phone }}"
+                >
+              </div>
+            {%- endif -%}
+
+            {%- if s.show_guests -%}
+              <div class="event-register__field">
+                <label for="{{ form_id }}-guests">{{ s.label_guests | escape }}</label>
+                <select id="{{ form_id }}-guests" name="contact[Number of guests]">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5+">5+</option>
+                </select>
+              </div>
+            {%- endif -%}
+
+            {%- if s.show_message -%}
+              <div class="event-register__field event-register__field--full">
+                <label for="{{ form_id }}-message">{{ s.label_message | escape }}</label>
+                <textarea id="{{ form_id }}-message" name="contact[Message]"></textarea>
+              </div>
+            {%- endif -%}
+          </div>
+
+          <div class="event-register__form-actions">
+            <button type="submit" class="events-button event-register__submit">
+              {{- s.button_label | escape -}}
+              <svg viewBox="0 0 10 10" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.2">
+                <path d="M3 1l4 4-4 4" />
+              </svg>
+            </button>
+          </div>
+        {%- endform -%}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Register your interest",
+  "tag": "section",
+  "class": "section-event-register",
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Display",
+      "options": [
+        { "value": "button", "label": "Heading + button" },
+        { "value": "form", "label": "Heading + enquiry form" }
+      ],
+      "default": "button",
+      "info": "The form sends submissions to your store's contact email."
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "select",
+      "id": "emblem_type",
+      "label": "Emblem",
+      "options": [
+        { "value": "monogram", "label": "Monogram" },
+        { "value": "image", "label": "Image" },
+        { "value": "none", "label": "None" }
+      ],
+      "default": "monogram"
+    },
+    {
+      "type": "text",
+      "id": "monogram",
+      "label": "Monogram letter",
+      "default": "L"
+    },
+    {
+      "type": "image_picker",
+      "id": "emblem_image",
+      "label": "Emblem image"
+    },
+    {
+      "type": "range",
+      "id": "emblem_width",
+      "min": 32,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Emblem size",
+      "default": 64
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Be Part of the Next Extraordinary Event"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Register now to receive exclusive invitations and event updates.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Register your interest"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link",
+      "info": "Used when \"Heading + button\" is selected."
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        { "value": "solid", "label": "Solid" },
+        { "value": "outline", "label": "Outline" }
+      ],
+      "default": "solid"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button label colour",
+      "info": "Used when the button is filled with the accent colour, including the form's submit button.",
+      "default": "#1a1206"
+    },
+    {
+      "type": "header",
+      "content": "Form fields"
+    },
+    {
+      "type": "text",
+      "id": "event_name",
+      "label": "Event name recorded with each entry",
+      "default": "Brilliance Unveiled"
+    },
+    {
+      "type": "text",
+      "id": "enquiry_label",
+      "label": "Enquiry label",
+      "default": "Event interest"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_phone",
+      "label": "Show phone field",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_guests",
+      "label": "Show number of guests field",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_message",
+      "label": "Show message field",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "label_name",
+      "label": "\"Name\" label",
+      "default": "Full name"
+    },
+    {
+      "type": "text",
+      "id": "label_email",
+      "label": "\"Email\" label",
+      "default": "Email address"
+    },
+    {
+      "type": "text",
+      "id": "label_phone",
+      "label": "\"Phone\" label",
+      "default": "Phone number"
+    },
+    {
+      "type": "text",
+      "id": "label_guests",
+      "label": "\"Guests\" label",
+      "default": "Number of guests"
+    },
+    {
+      "type": "text",
+      "id": "label_message",
+      "label": "\"Message\" label",
+      "default": "Message"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thank you. Your interest has been registered — we will be in touch with your invitation."
+    },
+    {
+      "type": "header",
+      "content": "Colours & type"
+    },
+    {
+      "type": "select",
+      "id": "heading_font",
+      "label": "Heading font",
+      "options": [
+        { "value": "serif", "label": "Elegant serif" },
+        { "value": "theme", "label": "Theme heading font" }
+      ],
+      "default": "serif"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent colour",
+      "default": "#c6a15b"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text colour",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background colour",
+      "default": "#0a0a0a"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 96
+    }
+  ],
+  "presets": [
+    {
+      "name": "Register your interest",
+      "category": "Events"
+    }
+  ]
+}
+{% endschema %}

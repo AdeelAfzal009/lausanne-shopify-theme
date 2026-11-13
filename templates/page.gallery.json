@@ -1,0 +1,44 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "editorial_gallery": {
+      "type": "editorial-gallery",
+      "settings": {
+        "eyebrow": "Editorial",
+        "heading": "Shoots",
+        "show_ornament": false,
+        "tile_ratio": "portrait",
+        "columns_desktop": "4",
+        "columns_tablet": "3",
+        "columns_mobile": "2",
+        "tile_gap": 16,
+        "heading_font": "theme",
+        "accent_color": "#000000",
+        "text_color": "#000000",
+        "background_color": "#ffffff",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    }
+  },
+  "order": [
+    "main",
+    "editorial_gallery"
+  ]
+}

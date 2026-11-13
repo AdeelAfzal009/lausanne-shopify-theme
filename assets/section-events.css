@@ -1,0 +1,1419 @@
+/* ==========================================================================
+   Events — shared styles for the event hero, moments slider, editorial
+   gallery and register sections. Per-section colours/spacing are injected
+   inline by each section.
+   ========================================================================== */
+
+.events-section {
+  --events-accent: #c6a15b;
+  --events-text: #ffffff;
+  --events-muted: rgba(255, 255, 255, 0.62);
+  --events-bg: #0a0a0a;
+  --events-hairline: rgba(255, 255, 255, 0.14);
+  --events-button-label: #1a1206;
+  --events-serif: 'Cormorant Garamond', 'Didot', 'Playfair Display', 'Times New Roman', Georgia, serif;
+
+  position: relative;
+  background-color: var(--events-bg);
+  color: var(--events-text);
+}
+
+.events-section--theme-font {
+  --events-serif: var(--font-heading-family, inherit);
+}
+
+/* -------------------------------------------------------------- typography */
+
+.events-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  margin: 0 0 2rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--events-accent);
+}
+
+.events-eyebrow::before {
+  content: '';
+  flex: 0 0 auto;
+  width: 3.6rem;
+  height: 1px;
+  background-color: var(--events-accent);
+}
+
+.events-eyebrow--center {
+  justify-content: center;
+}
+
+.events-eyebrow--center::after {
+  content: '';
+  flex: 0 0 auto;
+  width: 3.6rem;
+  height: 1px;
+  background-color: var(--events-accent);
+}
+
+.events-heading {
+  margin: 0;
+  font-family: var(--events-serif);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  color: var(--events-text);
+  text-wrap: balance;
+}
+
+.events-heading em {
+  font-style: italic;
+}
+
+.events-subheading {
+  margin: 1.6rem 0 0;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--events-text);
+}
+
+.events-text {
+  margin: 2rem 0 0;
+  max-width: 44rem;
+  font-size: 1.4rem;
+  line-height: 1.7;
+  color: var(--events-muted);
+}
+
+.events-text > *:first-child {
+  margin-top: 0;
+}
+
+.events-text > *:last-child {
+  margin-bottom: 0;
+}
+
+/* Diamond ornament divider under a centred heading */
+.events-ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-top: 1.8rem;
+}
+
+.events-ornament::before,
+.events-ornament::after {
+  content: '';
+  width: 4.4rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--events-hairline), transparent);
+}
+
+.events-ornament span {
+  width: 0.7rem;
+  height: 0.7rem;
+  border: 1px solid var(--events-accent);
+  transform: rotate(45deg);
+}
+
+/* ------------------------------------------------------------------ button */
+
+.events-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2.4rem;
+  min-width: 19rem;
+  padding: 1.5rem 2rem 1.5rem 2.4rem;
+  border: 1px solid transparent;
+  background-color: var(--events-accent);
+  color: var(--events-button-label);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.events-button:hover {
+  background-color: transparent;
+  border-color: var(--events-accent);
+  color: var(--events-accent);
+}
+
+.events-button:focus-visible {
+  outline: 0.2rem solid var(--events-accent);
+  outline-offset: 0.4rem;
+}
+
+.events-button svg {
+  flex: 0 0 auto;
+  width: 1rem;
+  height: 1rem;
+}
+
+.events-button--outline {
+  background-color: transparent;
+  border-color: var(--events-accent);
+  color: var(--events-accent);
+}
+
+.events-button--outline:hover {
+  background-color: var(--events-accent);
+  color: var(--events-button-label);
+}
+
+/* ==========================================================================
+   1. Hero with countdown
+   ========================================================================== */
+
+.event-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.event-hero--small {
+  min-height: 48rem;
+}
+.event-hero--medium {
+  min-height: 62rem;
+}
+.event-hero--large {
+  min-height: 78rem;
+}
+.event-hero--full {
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+/* Vertical content position on small screens only; desktop stays centered
+   via the default align-items above. */
+@media screen and (max-width: 749px) {
+  .event-hero--mobile-top {
+    align-items: flex-start;
+  }
+  .event-hero--mobile-middle {
+    align-items: center;
+  }
+  .event-hero--mobile-bottom {
+    align-items: flex-end;
+  }
+}
+
+.event-hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: var(--events-bg, #0a0a0a);
+}
+
+/* Each image/video variant fills the media box on its own layer. */
+.event-hero__layer {
+  position: absolute;
+  inset: 0;
+}
+
+.event-hero__media img,
+.event-hero__media video,
+.event-hero__media svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: var(--events-focal, center);
+}
+
+.event-hero__layer--mobile {
+  display: block;
+}
+
+.event-hero__layer--desktop {
+  display: none;
+}
+
+/* The section writes the configured gradient inline on this element. The
+   default below is only a floor so the text stays legible if it ever does
+   not arrive — an inline style always wins over it. */
+.event-hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image: linear-gradient(
+    100deg,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.51) 42%,
+    rgba(0, 0, 0, 0.15) 100%
+  );
+}
+
+.event-hero__inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+.event-hero__content {
+  max-width: 56rem;
+  padding: 8rem 0;
+}
+
+.event-hero--center .event-hero__content {
+  max-width: 72rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.event-hero--center .events-eyebrow {
+  justify-content: center;
+}
+
+.event-hero--center .events-text {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Sized for a full show name rather than a two-word title. */
+.event-hero__title {
+  font-size: clamp(3.4rem, 5.6vw, 6.4rem);
+}
+
+/* Dates and venue, set as one line of event credentials under the title. */
+.event-hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.2rem 2rem;
+  margin: 2.6rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.event-hero--center .event-hero__meta {
+  justify-content: center;
+}
+
+.event-hero__meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  font-size: 1.25rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--events-text);
+}
+
+.event-hero__meta-item svg {
+  flex: 0 0 auto;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--events-accent);
+}
+
+/* ---------------------------------------------------------------- countdown */
+
+.event-countdown {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(1.6rem, 3.5vw, 3.2rem);
+  margin: 4rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.event-hero--center .event-countdown {
+  justify-content: center;
+}
+
+.event-countdown__unit {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 6.4rem;
+}
+
+.event-countdown__unit + .event-countdown__unit::before {
+  content: '';
+  position: absolute;
+  left: calc(clamp(1.6rem, 3.5vw, 3.2rem) / -2);
+  top: 0.4rem;
+  width: 1px;
+  height: 3.6rem;
+  background-color: var(--events-hairline);
+}
+
+.event-countdown__value {
+  font-family: var(--events-serif);
+  font-size: clamp(3.2rem, 5vw, 4.6rem);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: var(--events-accent);
+}
+
+.event-countdown__label {
+  margin-top: 0.9rem;
+  font-size: 1rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--events-muted);
+}
+
+.event-countdown[hidden] {
+  display: none;
+}
+
+.event-countdown__expired {
+  margin: 4rem 0 0;
+  font-family: var(--events-serif);
+  font-size: 2.4rem;
+  color: var(--events-accent);
+}
+
+.event-hero__cta {
+  margin-top: 4rem;
+}
+
+/* ==========================================================================
+   2. Moments that sparkle — past events slider
+   ========================================================================== */
+
+.moments__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2.4rem;
+  margin-bottom: 4rem;
+}
+
+.moments__header-text {
+  min-width: 0;
+}
+
+.moments__heading {
+  font-size: clamp(3rem, 4.5vw, 4.6rem);
+}
+
+/* Ornament sits under a left-aligned heading, so it should not self-centre. */
+.moments__header .events-ornament {
+  justify-content: flex-start;
+}
+
+.moments__header .events-ornament::before {
+  display: none;
+}
+
+.moments__controls {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 0.6rem;
+}
+
+.moments__carousel {
+  position: relative;
+}
+
+.moments__viewport {
+  display: flex;
+  gap: var(--moments-gap, 2.4rem);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  /* room for card focus rings */
+  padding: 0.4rem;
+  margin: -0.4rem;
+}
+
+.moments__viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.moments__viewport:focus-visible {
+  outline: 0.2rem solid var(--events-accent);
+  outline-offset: 0.2rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .moments__viewport {
+    scroll-behavior: auto;
+  }
+}
+
+.moments__slide {
+  flex: 0 0 calc((100% - (var(--moments-per-view-mobile, 1) - 1) * var(--moments-gap, 2.4rem)) / var(--moments-per-view-mobile, 1));
+  scroll-snap-align: start;
+}
+
+/* ------------------------------------------------------------------- card */
+
+.moment-card {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #111;
+  color: inherit;
+  text-decoration: none;
+  aspect-ratio: var(--moments-ratio, 3 / 4);
+}
+
+.moment-card__media {
+  position: absolute;
+  inset: 0;
+}
+
+.moment-card__media deferred-media {
+  position: absolute;
+  inset: 0;
+  display: block;
+  overflow: hidden;
+}
+
+.moment-card__media img,
+.moment-card__media svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* The player is injected on click; it must cover the poster and the scrim. */
+.moment-card__media video,
+.moment-card__media iframe {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
+  background-color: #000;
+}
+
+.moment-card:hover .moment-card__media img {
+  transform: scale(1.05);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .moment-card:hover .moment-card__media img {
+    transform: none;
+  }
+}
+
+/* The section writes the configured gradient inline on this element. The
+   default below is only a floor so the caption stays legible if it ever does
+   not arrive — an inline style always wins over it. */
+.moment-card__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0) 45%);
+}
+
+/* A shadow keeps the caption legible over the brightest part of a photo,
+   whatever the overlay is set to. */
+.moment-card__info {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 4;
+  padding: 2.4rem 2.2rem;
+  pointer-events: none;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9), 0 2px 14px rgba(0, 0, 0, 0.7);
+}
+
+.moment-card__date {
+  margin: 0;
+  font-size: 1.05rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--events-muted);
+}
+
+.moment-card__title {
+  margin: 0.9rem 0 0;
+  font-family: var(--events-serif);
+  font-size: 2.2rem;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--events-text);
+}
+
+.moment-card__venue {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 1.1rem 0 0;
+  font-size: 1.2rem;
+  color: var(--events-muted);
+}
+
+.moment-card__venue svg {
+  flex: 0 0 auto;
+  width: 1.2rem;
+  height: 1.2rem;
+  opacity: 0.85;
+}
+
+/* -------------------------------------------------------- video play button */
+
+/* The poster image is a sibling of this button, not a child, so the button can
+   sit above the scrim while the poster stays below it. The button covers the
+   whole card so a click anywhere plays. */
+.moment-card__media .deferred-media__poster,
+.moment-card__play,
+.moment-card__pause {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+/* Square-edged to match the sharp-cornered buttons used across the theme. */
+.moment-card__play-icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 5.6rem;
+  height: 5.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.28);
+  transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.moment-card__play:hover .moment-card__play-icon {
+  background-color: rgba(255, 255, 255, 0.18);
+  transform: translate(-50%, -50%) scale(1.06);
+}
+
+.moment-card__play-icon svg {
+  width: 1.6rem;
+  height: 1.6rem;
+  margin-left: 0.3rem;
+  fill: #fff;
+}
+
+/* Once the player is in, the cover image is gone for good, but the play button
+   returns whenever the reel is paused so it can be resumed. The pause button
+   is its mirror image, shown only while the reel is actually running. */
+.moment-card__media deferred-media[loaded] > .moment-card__poster-img,
+.moment-card__media deferred-media[loaded]:not([data-paused]) > .moment-card__play {
+  display: none;
+}
+
+.moment-card__pause {
+  display: none;
+}
+
+.moment-card__media deferred-media[loaded]:not([data-paused]) > .moment-card__pause {
+  display: block;
+}
+
+/* Sits back while the reel plays, and comes forward on approach. */
+.moment-card__pause .moment-card__play-icon {
+  opacity: 0.5;
+}
+
+.moment-card__pause:hover .moment-card__play-icon,
+.moment-card__pause:focus-visible .moment-card__play-icon {
+  opacity: 1;
+}
+
+.moment-card__play-icon--pause svg {
+  width: 1.4rem;
+  height: 1.4rem;
+  margin-left: 0;
+}
+
+/* ---------------------------------------------------------------- controls */
+
+.moments__arrow {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 5.4rem;
+  height: 5.4rem;
+  border: 1px solid var(--events-hairline);
+  background-color: transparent;
+  color: var(--events-text);
+  cursor: pointer;
+  transition: border-color 0.25s ease, background-color 0.25s ease, opacity 0.25s ease;
+}
+
+.moments__arrow:hover:not([disabled]) {
+  border-color: var(--events-accent);
+}
+
+.moments__arrow[disabled] {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.moments__arrow svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+
+.moments__dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 3.6rem;
+}
+
+.moments__dot {
+  width: 0.7rem;
+  height: 0.7rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.moments__dot[aria-current='true'] {
+  background-color: var(--events-accent);
+  transform: scale(1.25);
+}
+
+/* ------------------------------------------------------------ lightbox --- */
+
+body.moments-lightbox-open {
+  overflow: hidden;
+}
+
+.moments-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Solid black set directly here, not only on the backdrop div below — this
+     way the whole screen goes dark the instant the overlay is present, even
+     if the backdrop layer were ever missing or fails to paint for any reason. */
+  background-color: #000;
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+}
+
+.moments-lightbox[hidden] {
+  display: none;
+}
+
+/* The video is the only thing meant to read on screen, like a spotlight
+   picking it out of a dark room — this vignette sits on top of the solid
+   black above. */
+.moments-lightbox__backdrop {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.86) 0%, #000 70%);
+}
+
+.moments-lightbox__stage {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 94vw;
+  max-height: 90vh;
+  animation: moments-lightbox-in 0.3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .moments-lightbox__stage {
+    animation: none;
+  }
+}
+
+@keyframes moments-lightbox-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* A soft glow instead of a hard edge is what actually sells the "spotlight" —
+   the video appears to be lit from behind rather than just pasted on black. */
+.moments-lightbox__stage video,
+.moments-lightbox__stage iframe {
+  filter: drop-shadow(0 0 8rem rgba(255, 255, 255, 0.1)) drop-shadow(0 3rem 6rem rgba(0, 0, 0, 0.7));
+}
+
+.moments-lightbox__stage video {
+  display: block;
+  max-width: 94vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  background-color: #000;
+}
+
+.moments-lightbox__stage iframe {
+  width: min(94vw, 128rem);
+  aspect-ratio: 16 / 9;
+  max-height: 90vh;
+  border: 0;
+  background-color: #000;
+}
+
+.moments-lightbox__close {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  z-index: 2;
+  width: 4.4rem;
+  height: 4.4rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+
+.moments-lightbox__close:hover {
+  background-color: rgba(255, 255, 255, 0.18);
+}
+
+.moments-lightbox__close svg {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+@media screen and (max-width: 749px) {
+  .moments-lightbox__close {
+    top: 1.2rem;
+    right: 1.2rem;
+    width: 3.8rem;
+    height: 3.8rem;
+  }
+}
+
+/* ==========================================================================
+   3. Editorial gallery
+   ========================================================================== */
+
+.editorial-gallery__header {
+  margin-bottom: 3.6rem;
+}
+
+.editorial-gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--gallery-columns-mobile, 2), 1fr);
+  gap: var(--gallery-gap, 1.6rem);
+}
+
+@media screen and (min-width: 750px) {
+  .editorial-gallery__grid {
+    grid-template-columns: repeat(var(--gallery-columns-tablet, 3), 1fr);
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .editorial-gallery__grid {
+    grid-template-columns: repeat(var(--gallery-columns, 4), 1fr);
+  }
+}
+
+.editorial-gallery__item {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: var(--gallery-ratio, 3 / 4);
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  background-color: var(--events-bg, #0a0a0a);
+  cursor: pointer;
+}
+
+.editorial-gallery__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.editorial-gallery__item:hover .editorial-gallery__img {
+  transform: scale(1.04);
+}
+
+/* Same treatment as the Moments cards: a bottom scrim keeps the caption
+   legible over the brightest part of a photo without needing a full-card
+   overlay. */
+.editorial-gallery__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0) 45%);
+}
+
+.editorial-gallery__info {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 2;
+  padding: 2rem 1.8rem;
+  text-align: left;
+  pointer-events: none;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9), 0 2px 14px rgba(0, 0, 0, 0.7);
+}
+
+.editorial-gallery__name {
+  margin: 0;
+  font-family: var(--events-serif);
+  font-size: 1.9rem;
+  font-weight: 400;
+  line-height: 1.2;
+  color: #fff;
+}
+
+.editorial-gallery__zoom {
+  position: absolute;
+  right: 1.4rem;
+  top: 1.4rem;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  opacity: 0;
+  transform: translateY(0.4rem);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.editorial-gallery__item:hover .editorial-gallery__zoom,
+.editorial-gallery__item:focus-visible .editorial-gallery__zoom {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.editorial-gallery__zoom svg {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+/* ---------------------------------------------------------- gallery lightbox */
+
+body.gallery-lightbox-open {
+  overflow: hidden;
+}
+
+.gallery-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000;
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+}
+
+.gallery-lightbox[hidden] {
+  display: none;
+}
+
+/* These all set their own unconditional `display`, which beats the browser's
+   default [hidden] rule — without this override, setting .hidden = true in
+   JS would stop being enough to actually hide them. */
+.gallery-lightbox__stage[hidden],
+.gallery-lightbox__arrow[hidden],
+.gallery-lightbox__counter[hidden],
+.gallery-lightbox__back[hidden],
+.gallery-lightbox__grid-wrap[hidden] {
+  display: none !important;
+}
+
+.gallery-lightbox__backdrop {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.86) 0%, #000 70%);
+}
+
+/* ---------------------------------------------------- shoot grid (step 2) */
+
+.gallery-lightbox__grid-wrap {
+  position: relative;
+  z-index: 1;
+  width: min(94vw, 120rem);
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: 1rem;
+  animation: moments-lightbox-in 0.3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-lightbox__grid-wrap {
+    animation: none;
+  }
+}
+
+.gallery-lightbox__grid-header {
+  text-align: center;
+  margin: 1rem 0 2.4rem;
+  color: #fff;
+}
+
+.gallery-lightbox__grid-title {
+  margin: 0;
+  font-family: var(--events-serif, serif);
+  font-size: 2.2rem;
+  font-weight: 400;
+}
+
+.gallery-lightbox__grid-count {
+  margin: 0.6rem 0 0;
+  font-size: 1.1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.gallery-lightbox__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media screen and (min-width: 750px) {
+  .gallery-lightbox__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .gallery-lightbox__grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+.gallery-lightbox__grid-item {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.gallery-lightbox__grid-item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.gallery-lightbox__grid-item:hover img {
+  transform: scale(1.05);
+  opacity: 0.85;
+}
+
+/* --------------------------------------------------- single photo (step 3) */
+
+.gallery-lightbox__stage {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 90vw;
+  max-height: 88vh;
+  animation: moments-lightbox-in 0.3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-lightbox__stage {
+    animation: none;
+  }
+}
+
+.gallery-lightbox__image {
+  display: block;
+  max-width: 90vw;
+  max-height: 88vh;
+  width: auto;
+  height: auto;
+  filter: drop-shadow(0 0 8rem rgba(255, 255, 255, 0.1)) drop-shadow(0 3rem 6rem rgba(0, 0, 0, 0.7));
+}
+
+.gallery-lightbox__close {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  z-index: 2;
+  width: 4.4rem;
+  height: 4.4rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+
+.gallery-lightbox__close:hover {
+  background-color: rgba(255, 255, 255, 0.18);
+}
+
+.gallery-lightbox__close svg {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.gallery-lightbox__back {
+  position: fixed;
+  top: 2rem;
+  left: 2rem;
+  z-index: 2;
+  width: 4.4rem;
+  height: 4.4rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+
+.gallery-lightbox__back:hover {
+  background-color: rgba(255, 255, 255, 0.18);
+}
+
+.gallery-lightbox__back svg {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+.gallery-lightbox__arrow {
+  position: fixed;
+  top: 50%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 5rem;
+  height: 5rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: background-color 0.25s ease;
+}
+
+.gallery-lightbox__arrow:hover {
+  background-color: rgba(255, 255, 255, 0.18);
+}
+
+.gallery-lightbox__arrow svg {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+.gallery-lightbox__arrow--prev {
+  left: 2rem;
+}
+
+.gallery-lightbox__arrow--next {
+  right: 2rem;
+}
+
+.gallery-lightbox__counter {
+  position: fixed;
+  bottom: 2.4rem;
+  left: 50%;
+  z-index: 2;
+  transform: translateX(-50%);
+  margin: 0;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 1.2rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 749px) {
+  .gallery-lightbox__close {
+    top: 1.2rem;
+    right: 1.2rem;
+    width: 3.8rem;
+    height: 3.8rem;
+  }
+
+  .gallery-lightbox__back {
+    top: 1.2rem;
+    left: 1.2rem;
+    width: 3.8rem;
+    height: 3.8rem;
+  }
+
+  .gallery-lightbox__arrow {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  .gallery-lightbox__arrow--prev {
+    left: 0.8rem;
+  }
+
+  .gallery-lightbox__arrow--next {
+    right: 0.8rem;
+  }
+
+  .gallery-lightbox__counter {
+    bottom: 1.4rem;
+  }
+}
+
+/* ==========================================================================
+   4. Register your interest
+   ========================================================================== */
+
+.event-register {
+  text-align: center;
+}
+
+.event-register__inner {
+  max-width: 62rem;
+  margin: 0 auto;
+}
+
+.event-register__emblem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 2.8rem;
+}
+
+.event-register__emblem img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+}
+
+.event-register__emblem svg {
+  color: var(--events-accent);
+}
+
+.event-register__heading {
+  font-size: clamp(2.6rem, 4vw, 4rem);
+}
+
+.event-register__text {
+  margin: 1.6rem auto 0;
+  max-width: 42rem;
+  font-size: 1.4rem;
+  line-height: 1.7;
+  color: var(--events-muted);
+}
+
+.event-register__cta {
+  margin-top: 3.2rem;
+}
+
+/* ------------------------------------------------------------------- form */
+
+.event-register__form {
+  margin-top: 3.6rem;
+  text-align: left;
+}
+
+.event-register__fields {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.6rem;
+}
+
+.event-register__field--full {
+  grid-column: 1 / -1;
+}
+
+.event-register__form label {
+  display: block;
+  margin-bottom: 0.8rem;
+  font-size: 1.1rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--events-muted);
+}
+
+.event-register__form input,
+.event-register__form select,
+.event-register__form textarea {
+  width: 100%;
+  padding: 1.3rem 1.4rem;
+  border: 1px solid var(--events-hairline);
+  border-radius: 0;
+  background-color: rgba(255, 255, 255, 0.04);
+  color: var(--events-text);
+  font-family: inherit;
+  font-size: 1.4rem;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.event-register__form textarea {
+  min-height: 11rem;
+  resize: vertical;
+}
+
+.event-register__form input::placeholder,
+.event-register__form textarea::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.event-register__form input:focus,
+.event-register__form select:focus,
+.event-register__form textarea:focus {
+  outline: none;
+  border-color: var(--events-accent);
+  background-color: rgba(255, 255, 255, 0.07);
+}
+
+.event-register__form select option {
+  color: #111;
+}
+
+.event-register__submit {
+  margin-top: 2.4rem;
+  justify-content: center;
+  width: 100%;
+}
+
+.event-register__message {
+  margin: 0 0 2.4rem;
+  padding: 1.4rem 1.6rem;
+  border: 1px solid var(--events-accent);
+  font-size: 1.4rem;
+  text-align: center;
+  color: var(--events-text);
+}
+
+.event-register__message--error {
+  border-color: rgba(255, 120, 120, 0.6);
+  color: #ffb4b4;
+}
+
+.event-register__message ul {
+  margin: 0.8rem 0 0;
+  padding-left: 1.8rem;
+  text-align: left;
+}
+
+/* ==========================================================================
+   Breakpoints
+   ========================================================================== */
+
+@media screen and (min-width: 750px) {
+  /* Hairline between the meta items once they share a line. */
+  .event-hero__meta {
+    gap: 1.2rem 0;
+  }
+
+  .event-hero__meta-item + .event-hero__meta-item {
+    margin-left: 2.4rem;
+    padding-left: 2.4rem;
+    border-left: 1px solid var(--events-hairline);
+  }
+
+  .event-hero__layer--mobile {
+    display: none;
+  }
+
+  .event-hero__layer--desktop {
+    display: block;
+  }
+
+  .moments__slide {
+    flex-basis: calc(
+      (100% - (var(--moments-per-view-tablet, 2) - 1) * var(--moments-gap, 2.4rem)) / var(--moments-per-view-tablet, 2)
+    );
+  }
+
+  .moment-card__info {
+    padding: 2.8rem 2.6rem;
+  }
+
+  .event-register__fields--split {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .event-register__submit {
+    width: auto;
+    min-width: 24rem;
+  }
+
+  .event-register__form-actions {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  /* All the slides fit on one desktop screen, so the arrows would be dead
+     controls. Narrower views show fewer cards and still need them. */
+  moments-slider[data-no-scroll] .moments__controls {
+    display: none;
+  }
+
+  .moments__slide {
+    flex-basis: calc(
+      (100% - (var(--moments-per-view, 3) - 1) * var(--moments-gap, 2.4rem)) / var(--moments-per-view, 3)
+    );
+  }
+
+}

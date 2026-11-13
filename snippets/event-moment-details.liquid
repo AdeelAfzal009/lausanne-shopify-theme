@@ -1,0 +1,37 @@
+{%- comment -%}
+  Renders the date / name / venue overlay on a past-event card.
+
+  Accepts:
+  - block: {Object} A "event" block from the Past events slider section.
+  - info_style: {String} Optional inline custom properties setting the caption
+    colour. Card captions sit on photography, so they carry their own colour
+    rather than the section text colour used by the heading.
+
+  Usage:
+  {% render 'event-moment-details', block: block, info_style: info_style %}
+{%- endcomment -%}
+
+{%- if block.settings.event_date != blank
+    or block.settings.event_name != blank
+    or block.settings.event_venue != blank
+-%}
+  <div class="moment-card__info" style="{{ info_style }}">
+    {%- if block.settings.event_date != blank -%}
+      <p class="moment-card__date">{{ block.settings.event_date | escape }}</p>
+    {%- endif -%}
+
+    {%- if block.settings.event_name != blank -%}
+      <h3 class="moment-card__title">{{ block.settings.event_name | escape }}</h3>
+    {%- endif -%}
+
+    {%- if block.settings.event_venue != blank -%}
+      <p class="moment-card__venue">
+        <svg viewBox="0 0 12 14" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.1">
+          <path d="M6 .8c2.4 0 4.4 2 4.4 4.4 0 3.1-4.4 7.5-4.4 7.5S1.6 8.3 1.6 5.2C1.6 2.8 3.6.8 6 .8z" />
+          <circle cx="6" cy="5.2" r="1.6" />
+        </svg>
+        <span>{{ block.settings.event_venue | escape }}</span>
+      </p>
+    {%- endif -%}
+  </div>
+{%- endif -%}

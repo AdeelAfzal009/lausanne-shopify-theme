@@ -1,0 +1,357 @@
+<!-- Sidebar Container -->
+<div class="multi-sidebar-container" id="multiSidebar">
+  <div class="sidebar-overlay"></div>
+  <div class="sidebar-wrapper">
+
+    <!-- Main Sidebar -->
+    <div class="sidebar active" data-index="0">
+      <button class="sidebar-close-btn" aria-label="Close menu"><svg xmlns="http://www.w3.org/2000/svg" fill="none" class="icon icon-close" viewBox="0 0 18 17"><path fill="currentColor" d="M.865 15.978a.5.5 0 0 0 .707.707l7.433-7.431 7.579 7.282a.501.501 0 0 0 .846-.37.5.5 0 0 0-.153-.351L9.712 8.546l7.417-7.416a.5.5 0 1 0-.707-.708L8.991 7.853 1.413.573a.5.5 0 1 0-.693.72l7.563 7.268z"/></svg></button>
+      <div class="sidebar-content">
+        <h3>Main Menu</h3>
+        <ul>
+          <li class="sidebar-menu-item"><a href="https://lausanne-jewellers.myshopify.com/">Home</a></li>
+          <li class="sidebar-menu-item has-children" data-menu="shop">Shop</li>
+          <li class="sidebar-menu-item has-children" data-menu="about">About Us</li>
+          <li class="sidebar-menu-item"><a href="https://lausanne.ae/pages/events">Events</a></li>
+          <li class="sidebar-menu-item"><a href="https://lausanne.ae/pages/gallery">Gallery</a></li>
+          <li class="sidebar-menu-item"><a href="https://lausanne.ae/pages/contact">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-footer-content">
+        <ul>
+          <li class="sidebar-footer-menu-item"><a href="https://lausanne.ae/pages/contact">Contact us</a></li>
+          <li class="sidebar-menu-item"><a href="tel:+97142259888">Landline: +971 42 259 888</a></li>
+          <li class="sidebar-menu-item"><a href="tel:+971506005514">Mobile: +971 50 600 5514</a></li>
+          <li class="sidebar-menu-item"><a href="mailto:Lausanne@lausanne.ae">Email: Lausanne@lausanne.ae</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Second Sidebar: Dynamic -->
+    <div class="sidebar" data-index="1" id="secondSidebar">
+      <div class="sidebar-content" id="secondSidebarContent"></div>
+    </div>
+
+    <!-- Third Sidebar: Dynamic -->
+    <div class="sidebar" data-index="2" id="thirdSidebar">
+      <div class="sidebar-content" id="thirdSidebarContent"></div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const openSidebarBtn = document.getElementById('openSidebarBtn');
+  const multiSidebar = document.getElementById('multiSidebar');
+  const overlay = document.querySelector('.sidebar-overlay');
+  const sidebarCloseBtn = document.querySelector('.sidebar-close-btn');
+  const secondSidebar = document.getElementById('secondSidebar');
+  const secondSidebarContent = document.getElementById('secondSidebarContent');
+  const thirdSidebar = document.getElementById('thirdSidebar');
+  const thirdSidebarContent = document.getElementById('thirdSidebarContent');
+  const firstSidebarContent = document.querySelector('.sidebar[data-index="0"] .sidebar-content');
+
+  let isMobile = window.innerWidth <= 768;
+  let menuStack = [];
+
+  window.addEventListener('resize', () => {
+    isMobile = window.innerWidth <= 768;
+  });
+
+  // Sidebar open/close
+  openSidebarBtn.addEventListener('click', () => {
+    multiSidebar.classList.add('active');
+  });
+
+  overlay.addEventListener('click', closeAll);
+  sidebarCloseBtn.addEventListener('click', closeAll);
+
+  function closeAll() {
+    multiSidebar.classList.remove('active');
+    secondSidebar.classList.remove('active');
+    thirdSidebar.classList.remove('active');
+  }
+
+  // Menu structure
+  const menuData = {
+    shop: `
+      <span class="back-button" data-back="0">← Back</span>
+      <h3>Shop</h3>
+      <ul>
+        <li class="sidebar-menu-item has-children" data-submenu="rings">Rings</li>
+        <li class="sidebar-menu-item has-children" data-submenu="bracelets">Bangles</li>
+        <li class="sidebar-menu-item"><a href="https://lausanne.ae/collections/mina-gold-bracelets">Mina Gold Bracelets</a></li>
+        <li class="sidebar-menu-item has-children" data-submenu="earrings">Earrings</li>
+        <li class="sidebar-menu-item has-children" data-submenu="necklaces">Necklaces</li>
+        <li class="sidebar-menu-item"><a href="https://lausanne.ae/collections/mina-gold-chains">Mina Gold Chains</a></li>
+        <li class="sidebar-menu-item has-children" data-submenu="pendants">Pendants</li>
+        <li class="sidebar-menu-item"><a href="https://lausanne.ae/collections/all-in-one-jewelry-sets">All-in-One Jewelry Sets</a></li>
+        <li class="sidebar-menu-item"><a href="#">Exclusive</a></li>
+        <li class="sidebar-menu-item"><a href="#">Gift for Her</a></li>
+        <li class="sidebar-menu-item"><a href="https://lausanne.ae/collections/jewelery">Shop All</a></li>
+      </ul>
+    `,
+    about: `
+      <span class="back-button" data-back="0">← Back</span>
+      <h3>About Us</h3>
+      <ul>
+        <li class="sidebar-menu-item"><a href="https://lausanne.ae/pages/about-us">Our Story</a></li>
+        <li class="sidebar-menu-item"><a href="https://lausanne.ae/pages/request-an-appointment">Book an Appointment</a></li>
+      </ul>
+    `
+  };
+
+  const submenuData = {
+    rings: `
+      <span class="back-button" data-back="1">← Back</span>
+      <h3>Rings</h3>
+      <ul>
+        <li class="sidebar-menu-item"><a href="https://lausanne.ae/collections/mina-gold-rings">Mina Gold Rings</a></li>
+        <li class="sidebar-menu-item"><a href="https://lausanne.ae/collections/gold-rings">Gold Rings</a></li>
+      </ul>
+    `,
+    bracelets: `
+      <span class="back-button" data-back="1">← Back</span>
+      <h3>Bracelets</h3>
+      <ul>
+        <li class="sidebar-menu-item"><a href="https://lausanne.ae/collections/mina-gold-bangles">Mina Gold Bangles</a></li>
+        <li class="sidebar-menu-item"><a href="https://lausanne.ae/collections/bangles">Gold Bangles</a></li>
+      </ul>
+    `,
+    earrings: `
+      <span class="back-button" data-back="1">← Back</span>
+      <h3>Earrings</h3>
+      <ul>
+        <li class="sidebar-menu-item"><a href="https://lausanne.ae/collections/mina-gold-earrings">Mina Gold Earrings</a></li>
+        <li class="sidebar-menu-item"><a href="https://lausanne.ae/collections/gold-earrings">Gold Earrings</a></li>
+      </ul>
+    `,
+    necklaces: `
+      <span class="back-button" data-back="1">← Back</span>
+      <h3>Necklaces</h3>
+      <ul>
+        <li class="sidebar-menu-item"><a href="https://lausanne.ae/collections/mina-gold-necklaces">Mina Gold Necklaces</a></li>
+        <li class="sidebar-menu-item"><a href="https://lausanne.ae/collections/gold-necklaces">Gold Necklaces</a></li>
+      </ul>
+    `,
+    pendants: `
+      <span class="back-button" data-back="1">← Back</span>
+      <h3>Pendants</h3>
+      <ul>
+        <li class="sidebar-menu-item"><a href="https://lausanne.ae/collections/mina-gold-pendants">Mina Gold Pendants</a></li>
+        <li class="sidebar-menu-item"><a href="https://lausanne.ae/collections/gold-pendants">Gold Pendants</a></li>
+      </ul>
+    `
+  };
+
+  // Animate content
+  function animateContent(container, newHtml) {
+    container.classList.remove('fade-in');
+    container.classList.add('fade-out');
+
+    setTimeout(() => {
+      container.innerHTML = newHtml;
+      container.classList.remove('fade-out');
+      container.classList.add('fade-in');
+    }, 200);
+  }
+
+  function loadSidebarContent(level, html) {
+    if (isMobile) {
+      menuStack.push(firstSidebarContent.innerHTML);
+      animateContent(firstSidebarContent, html);
+    } else {
+      if (level === 1) {
+        animateContent(secondSidebarContent, html);
+        secondSidebar.classList.add('active');
+        thirdSidebar.classList.remove('active');
+      } else if (level === 2) {
+        animateContent(thirdSidebarContent, html);
+        thirdSidebar.classList.add('active');
+      }
+    }
+  }
+
+  function goBackMobile() {
+    if (menuStack.length > 0) {
+      const prev = menuStack.pop();
+      animateContent(firstSidebarContent, prev);
+    }
+  }
+
+  // Event handling (desktop + mobile)
+  document.querySelector('[data-index="0"]').addEventListener('click', (e) => {
+    const item = e.target.closest('.has-children');
+    const backBtn = e.target.closest('.back-button');
+
+    if (item && item.dataset.menu) {
+      loadSidebarContent(1, menuData[item.dataset.menu]);
+    }
+
+    if (isMobile && item && item.dataset.submenu && submenuData[item.dataset.submenu]) {
+      loadSidebarContent(1, submenuData[item.dataset.submenu]);
+    }
+
+    if (backBtn) {
+      goBackMobile();
+    }
+  });
+
+  secondSidebar.addEventListener('click', (e) => {
+    const item = e.target.closest('.has-children');
+    const backBtn = e.target.closest('.back-button');
+
+    if (backBtn) {
+      secondSidebar.classList.remove('active');
+      thirdSidebar.classList.remove('active');
+    }
+
+    if (item && item.dataset.submenu) {
+      loadSidebarContent(2, submenuData[item.dataset.submenu]);
+    }
+  });
+
+  thirdSidebar.addEventListener('click', (e) => {
+    const backBtn = e.target.closest('.back-button');
+    if (backBtn) {
+      thirdSidebar.classList.remove('active');
+    }
+  });
+</script>
+
+<style>
+  .multi-sidebar-container {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+  }
+
+  .multi-sidebar-container.active {
+    display: block;
+  }
+
+  .sidebar-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .multi-sidebar-container.active .sidebar-overlay {
+    opacity: 1;
+  }
+
+  .sidebar-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .sidebar-menu-item.has-children::after {
+  content: 'next';
+  font-family: swiper-icons;
+    font-size: 12px;
+    text-transform: none !important;
+    letter-spacing: 0;
+    font-variant: initial;
+    line-height: 30px;
+    align-self: center;
+    text-align: right;
+    float: right;
+}
+
+  .sidebar-content ul li.sidebar-menu-item {
+    font-size: 18px;
+    list-style: none;
+}
+  .sidebar-content h3 {
+    font-weight: bold;
+}
+
+  .sidebar {
+    width: 350px;
+    height: 100%;
+    background-color: #fff;
+    border-right: 1px solid #ccc;
+    overflow-y: auto;
+    display: block;
+    flex-shrink: 0;
+    position: relative;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform: translateX(-100%);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .sidebar svg.icon.icon-close {
+    width: 15px;
+  }
+  .sidebar.active {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .sidebar-content {
+    padding: 20px;
+  }
+
+  .sidebar-menu-item {
+    margin: 10px 0;
+    cursor: pointer;
+  }
+
+  .sidebar-menu-item a {
+    text-decoration: none;
+    color: #000;
+  }
+
+  /* .has-children {
+    font-weight: bold;
+  } */
+
+  .back-button {
+    cursor: pointer;
+    color: #404040;
+    font-weight: 400;
+    margin-bottom: 10px;
+    display: inline-block;
+  }
+
+  .sidebar-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  /* Fade animations for inner content */
+  .fade-out {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .fade-in {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  .sidebar-content ul {
+    padding-inline-start: 20px;
+}
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 330px;
+    }
+  }
+</style>

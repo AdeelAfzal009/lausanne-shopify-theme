@@ -1,0 +1,622 @@
+{%- comment -%}
+  The card poster/player is styled entirely in section-events.css, so
+  component-deferred-media.css is deliberately not loaded here — its
+  `.deferred-media__poster img` rule would fight the cover-fit images.
+{%- endcomment -%}
+{{ 'section-events.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'events.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign s = section.settings
+
+  case s.card_ratio
+    when 'portrait'
+      assign ratio = '3 / 4'
+    when 'tall'
+      assign ratio = '2 / 3'
+    when 'square'
+      assign ratio = '1 / 1'
+    when 'landscape'
+      assign ratio = '4 / 3'
+    else
+      assign ratio = '3 / 4'
+  endcase
+
+  # A smooth fade from the chosen colour at the bottom of the card up to fully
+  # transparent. Both stops use the same colour so the fade never drifts
+  # through grey, which is what the `transparent` keyword would do.
+  assign card_o = s.card_overlay_opacity | divided_by: 100.0
+  assign overlay_color = s.card_overlay_color | default: '#000000'
+  assign overlay_from = overlay_color | color_modify: 'alpha', card_o
+  assign overlay_to = overlay_color | color_modify: 'alpha', 0
+  assign band_top = s.card_overlay_height
+-%}
+
+{%- comment -%}
+  Written straight onto the elements: an inline style cannot be lost to a
+  selector mismatch or beaten by another rule, so the settings always win.
+{%- endcomment -%}
+{%- capture scrim_style -%}
+  background-image: linear-gradient(to top, {{ overlay_from }} 0%, {{ overlay_to }} {{ band_top }}%);
+{%- endcapture -%}
+{%- assign scrim_style = scrim_style | strip_newlines | strip -%}
+
+{%- capture info_style -%}
+  --events-text: {{ s.card_text_color }}; --events-muted: {{ s.card_text_color | color_modify: 'alpha', 0.72 }};
+{%- endcapture -%}
+{%- assign info_style = info_style | strip_newlines | strip -%}
+
+{%- style -%}
+  #EventMoments-{{ section.id }} {
+    --events-accent: {{ s.accent_color }};
+    --events-text: {{ s.text_color }};
+    --events-muted: {{ s.text_color | color_modify: 'alpha', 0.62 }};
+    --events-bg: {{ s.background_color }};
+    --events-hairline: {{ s.text_color | color_modify: 'alpha', 0.16 }};
+    --moments-ratio: {{ ratio }};
+    --moments-gap: {{ s.card_gap }}px;
+    --moments-per-view: {{ s.columns_desktop }};
+    --moments-per-view-tablet: {{ s.columns_tablet }};
+    --moments-per-view-mobile: {{ s.columns_mobile }};
+  }
+
+
+  #EventMoments-{{ section.id }} .event-moments {
+    padding-top: {{ s.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ s.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    #EventMoments-{{ section.id }} .event-moments {
+      padding-top: {{ s.padding_top }}px;
+      padding-bottom: {{ s.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div
+  id="EventMoments-{{ section.id }}"
+  class="events-section{% if s.heading_font == 'theme' %} events-section--theme-font{% endif %}"
+>
+  <div class="event-moments page-width">
+    {%- comment -%}
+      The header lives inside <moments-slider> so the arrows sit beside the
+      heading while staying within the element that wires up their clicks.
+    {%- endcomment -%}
+    <moments-slider
+      class="moments__carousel"
+      data-autoplay="{% if s.enable_autoplay %}{{ s.autoplay_speed }}{% else %}0{% endif %}"
+    >
+      {%- if s.eyebrow != blank or s.heading != blank or s.show_arrows -%}
+        <div class="moments__header">
+          <div class="moments__header-text">
+            {%- if s.eyebrow != blank -%}
+              <p class="events-eyebrow">{{ s.eyebrow | escape }}</p>
+            {%- endif -%}
+            {%- if s.heading != blank -%}
+              <h2 class="events-heading moments__heading">{{ s.heading }}</h2>
+            {%- endif -%}
+            {%- if s.show_ornament -%}
+              <div class="events-ornament" aria-hidden="true"><span></span></div>
+            {%- endif -%}
+          </div>
+
+          {%- if s.show_arrows and section.blocks.size > 0 -%}
+            <div class="moments__controls">
+              <button
+                type="button"
+                name="previous"
+                class="moments__arrow moments__arrow--prev"
+                aria-label="{{ 'general.slider.previous_slide' | t }}"
+                aria-controls="MomentsViewport-{{ section.id }}"
+              >
+                <svg viewBox="0 0 12 20" aria-hidden="true" focusable="false">
+                  <path d="M10 1L2 10l8 9" />
+                </svg>
+              </button>
+              <button
+                type="button"
+                name="next"
+                class="moments__arrow moments__arrow--next"
+                aria-label="{{ 'general.slider.next_slide' | t }}"
+                aria-controls="MomentsViewport-{{ section.id }}"
+              >
+                <svg viewBox="0 0 12 20" aria-hidden="true" focusable="false">
+                  <path d="M2 1l8 9-8 9" />
+                </svg>
+              </button>
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if section.blocks.size > 0 -%}
+        <div class="moments__viewport" id="MomentsViewport-{{ section.id }}" data-moments-viewport tabindex="0">
+          {%- for block in section.blocks -%}
+            {%- liquid
+              assign b = block.settings
+              assign is_video = false
+              if b.media_type == 'video'
+                if b.video != blank or b.video_url != blank
+                  assign is_video = true
+                endif
+              endif
+
+              assign poster = b.image
+              if poster == blank and b.video != blank
+                assign poster = b.video.preview_image
+              endif
+
+              assign card_alt = b.event_name | default: 'Past event' | strip_html
+              assign card_alt_esc = card_alt | escape
+              assign image_alt = b.image.alt | default: card_alt
+            -%}
+
+            <div class="moments__slide" data-moments-slide {{ block.shopify_attributes }}>
+              {%- if is_video -%}
+                {%- liquid
+                  assign video_id = b.video.id | default: b.video_url.id
+                  assign play_label = 'Play video' | append: ': ' | append: card_alt
+                -%}
+                <div class="moment-card">
+                  <div class="moment-card__media">
+                    <deferred-media data-media-id="{{ video_id }}">
+                      {%- comment -%}
+                        The poster sits outside the button so the caption and
+                        scrim can layer above the button without being covered.
+                      {%- endcomment -%}
+                      {%- if poster != blank -%}
+                        {{
+                          poster
+                          | image_url: width: 1100
+                          | image_tag:
+                            class: 'moment-card__poster-img',
+                            loading: 'lazy',
+                            widths: '275, 375, 550, 750, 1100',
+                            sizes: '(min-width: 990px) 33vw, (min-width: 750px) 50vw, 85vw',
+                            alt: card_alt
+                        }}
+                      {%- else -%}
+                        {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg moment-card__poster-img' }}
+                      {%- endif -%}
+                      <button
+                        id="Deferred-Poster-{{ section.id }}-{{ block.id }}"
+                        class="moment-card__play deferred-media__poster"
+                        type="button"
+                        data-moments-play
+                        aria-label="{{ play_label | escape }}"
+                      >
+                        <span class="moment-card__play-icon">
+                          <svg viewBox="0 0 14 16" aria-hidden="true" focusable="false">
+                            <path d="M13 8L0 16V0z" />
+                          </svg>
+                        </span>
+                      </button>
+                      <button
+                        class="moment-card__pause"
+                        type="button"
+                        data-moments-pause
+                        aria-label="{{ 'Pause video: ' | append: card_alt | escape }}"
+                      >
+                        <span class="moment-card__play-icon moment-card__play-icon--pause">
+                          <svg viewBox="0 0 14 16" aria-hidden="true" focusable="false">
+                            <rect x="1.5" y="0" width="3.8" height="16" />
+                            <rect x="8.7" y="0" width="3.8" height="16" />
+                          </svg>
+                        </span>
+                      </button>
+                      <template>
+                        {%- if b.video != blank -%}
+                          {{
+                            b.video
+                            | video_tag: image_size: '1100x', autoplay: true, loop: false, controls: false, muted: false
+                          }}
+                        {%- elsif b.video_url.type == 'youtube' -%}
+                          <iframe
+                            src="https://www.youtube.com/embed/{{ b.video_url.id }}?enablejsapi=1&autoplay=1"
+                            class="js-youtube"
+                            allow="autoplay; encrypted-media"
+                            allowfullscreen
+                            title="{{ card_alt_esc }}"
+                          ></iframe>
+                        {%- else -%}
+                          <iframe
+                            src="https://player.vimeo.com/video/{{ b.video_url.id }}?autoplay=1"
+                            class="js-vimeo"
+                            allow="autoplay; encrypted-media"
+                            allowfullscreen
+                            title="{{ card_alt_esc }}"
+                          ></iframe>
+                        {%- endif -%}
+                      </template>
+                    </deferred-media>
+                  </div>
+
+                  <div class="moment-card__scrim" style="{{ scrim_style }}"></div>
+                  {%- render 'event-moment-details', block: block, info_style: info_style -%}
+                </div>
+              {%- else -%}
+                {%- liquid
+                  assign tag = 'div'
+                  if b.link != blank
+                    assign tag = 'a'
+                  endif
+                -%}
+                <{{ tag }}
+                  class="moment-card"
+                  {% if b.link != blank %}
+                    href="{{ b.link }}"
+                  {% endif %}
+                >
+                  <div class="moment-card__media">
+                    {%- if b.image != blank -%}
+                      {{
+                        b.image
+                        | image_url: width: 1100
+                        | image_tag:
+                          loading: 'lazy',
+                          widths: '275, 375, 550, 750, 1100',
+                          sizes: '(min-width: 990px) 33vw, (min-width: 750px) 50vw, 85vw',
+                          alt: image_alt
+                      }}
+                    {%- else -%}
+                      {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                    {%- endif -%}
+                  </div>
+
+                  <div class="moment-card__scrim" style="{{ scrim_style }}"></div>
+                  {%- render 'event-moment-details', block: block, info_style: info_style -%}
+                </{{ tag }}>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+
+        {%- if s.show_dots -%}
+          <div
+            class="moments__dots"
+            data-moments-dots
+            data-slide-label="Slide"
+          ></div>
+        {%- endif -%}
+
+        {%- comment -%}
+          Reels play here, not inline in the card: the card is far too small
+          for a video to be watched properly. Hidden by default; JS moves the
+          clicked player in and shows it.
+        {%- endcomment -%}
+        <div class="moments-lightbox" data-moments-lightbox hidden>
+          <div class="moments-lightbox__backdrop" data-moments-lightbox-dismiss></div>
+          <div class="moments-lightbox__stage" data-moments-lightbox-stage></div>
+          <button
+            type="button"
+            class="moments-lightbox__close"
+            data-moments-lightbox-dismiss
+            aria-label="{{ 'accessibility.close' | t | default: 'Close' }}"
+          >
+            <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false" stroke="currentColor" stroke-width="1.4" fill="none">
+              <path d="M2 2l12 12M14 2L2 14" />
+            </svg>
+          </button>
+        </div>
+      {%- endif -%}
+    </moments-slider>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Past events slider",
+  "tag": "section",
+  "class": "section-event-moments",
+  "max_blocks": 24,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Label above heading",
+      "default": "Past events"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Moments That Sparkle"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_ornament",
+      "label": "Show diamond divider",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "card_ratio",
+      "label": "Card shape",
+      "options": [
+        { "value": "tall", "label": "Tall (2:3)" },
+        { "value": "portrait", "label": "Portrait (3:4)" },
+        { "value": "square", "label": "Square (1:1)" },
+        { "value": "landscape", "label": "Landscape (4:3)" }
+      ],
+      "default": "portrait"
+    },
+    {
+      "type": "select",
+      "id": "columns_desktop",
+      "label": "Cards per view on desktop",
+      "options": [
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" },
+        { "value": "5", "label": "5" }
+      ],
+      "default": "3"
+    },
+    {
+      "type": "select",
+      "id": "columns_tablet",
+      "label": "Cards per view on tablet",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Cards per view on mobile",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Space between cards",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Card overlay"
+    },
+    {
+      "type": "color",
+      "id": "card_overlay_color",
+      "label": "Overlay colour",
+      "info": "The colour the card fades into at the bottom. Use a light colour with dark card text.",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "card_overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Overlay darkness",
+      "info": "How dark the band behind the event details is. Raise this for bright images.",
+      "default": 85
+    },
+    {
+      "type": "range",
+      "id": "card_overlay_height",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Overlay height",
+      "info": "How far up the card the fade reaches, measured from the bottom. 100% fades across the whole card.",
+      "default": 45
+    },
+    {
+      "type": "color",
+      "id": "card_text_color",
+      "label": "Card text colour",
+      "info": "Applies to the date, event name and venue shown on the card.",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Slider controls"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "label": "Show arrows",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dots",
+      "label": "Show dots",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay",
+      "label": "Auto-advance slides",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "min": 3,
+      "max": 12,
+      "step": 1,
+      "unit": "s",
+      "label": "Seconds between slides",
+      "default": 6
+    },
+    {
+      "type": "header",
+      "content": "Colours & type"
+    },
+    {
+      "type": "select",
+      "id": "heading_font",
+      "label": "Heading font",
+      "options": [
+        { "value": "serif", "label": "Elegant serif" },
+        { "value": "theme", "label": "Theme heading font" }
+      ],
+      "default": "serif"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent colour",
+      "default": "#c6a15b"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text colour",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background colour",
+      "default": "#0a0a0a"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 88
+    }
+  ],
+  "blocks": [
+    {
+      "type": "event",
+      "name": "Past event",
+      "settings": [
+        {
+          "type": "select",
+          "id": "media_type",
+          "label": "Media type",
+          "options": [
+            { "value": "image", "label": "Image" },
+            { "value": "video", "label": "Video" }
+          ],
+          "default": "image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "On video cards this is the thumbnail shown until the video is played."
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video",
+          "info": "A video hosted in Shopify. Takes priority over the video URL."
+        },
+        {
+          "type": "video_url",
+          "id": "video_url",
+          "label": "Video URL",
+          "accept": ["youtube", "vimeo"]
+        },
+        {
+          "type": "header",
+          "content": "Event details"
+        },
+        {
+          "type": "text",
+          "id": "event_date",
+          "label": "Event date",
+          "info": "Shown as typed, e.g. May 2024.",
+          "default": "May 2024"
+        },
+        {
+          "type": "text",
+          "id": "event_name",
+          "label": "Event name",
+          "default": "Eid Exclusive Showcase"
+        },
+        {
+          "type": "text",
+          "id": "event_venue",
+          "label": "Event venue",
+          "default": "Emirates Palace, Abu Dhabi"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link",
+          "info": "Image cards only. Video cards open the player instead."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Past events slider",
+      "category": "Events",
+      "blocks": [
+        {
+          "type": "event",
+          "settings": {
+            "event_date": "May 2024",
+            "event_name": "Eid Exclusive Showcase",
+            "event_venue": "Emirates Palace, Abu Dhabi"
+          }
+        },
+        {
+          "type": "event",
+          "settings": {
+            "event_date": "Feb 2024",
+            "event_name": "Timeless Elegance",
+            "event_venue": "Burj Al Arab, Dubai"
+          }
+        },
+        {
+          "type": "event",
+          "settings": {
+            "event_date": "Dec 2023",
+            "event_name": "Lausanne Luxury Night",
+            "event_venue": "Four Seasons, Dubai"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

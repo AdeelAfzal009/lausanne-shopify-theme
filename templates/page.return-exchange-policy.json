@@ -1,0 +1,127 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "two_column_policy_info_bXcWfn": {
+      "type": "two-column-policy-info",
+      "blocks": {
+        "collapsible_row_dLYnza": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "1. Return & Exchange Eligibility",
+            "icon": "none",
+            "row_content": "<p>You may request a return or exchange within 15 days of receiving your order, provided:</p><ul><li>The item is unused, unworn, and in original condition.</li><li>It includes all original packaging, certificates, guarantee cards, and tags.</li><li>It is returned with the barcode tag intact.</li><li>It is accompanied by the original invoice or proof of purchase.</li></ul>",
+            "page": ""
+          }
+        },
+        "collapsible_row_qAaW9N": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "2. Non-Returnable Items",
+            "icon": "none",
+            "row_content": "<p>We do not accept returns or exchanges for:</p><ul><li><strong>Earrings</strong> (due to hygiene)</li><li>Personalized, engraved, or made-to-order jewelry</li><li>Gold coins</li><li>Items bought during sales or promotional campaigns</li><li>Products that have been altered, resized, damaged, or show signs of wear</li></ul>",
+            "page": ""
+          }
+        },
+        "collapsible_row_gWRWRG": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "3. How to Initiate a Return or Exchange",
+            "icon": "none",
+            "row_content": "<p>Customers can initiate a return or exchange via either of the following methods:</p><ul><li><strong>Login to your account</strong> on our website, go to <strong>‘My Orders’</strong> and click <strong>‘Return’</strong></li><li>Alternatively, use the <strong>‘Track My Order’</strong> feature on the website</li></ul><p>This must be done <strong>within 15 days</strong> of receiving your item (except for non-returnable categories above).</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_abff97": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "4. Secure Return Process",
+            "icon": "none",
+            "row_content": "<p>Each order includes a barcode tag for secure returns. Please follow these steps:</p><ol><li>Place the item in its original packaging.</li><li>Securely seal the package.</li><li>Our shipping agent will collect the package from your doorstep (a nominal delivery charge applies).<br/>Important: Returns not following this protocol may be rejected.</li></ol>",
+            "page": ""
+          }
+        },
+        "collapsible_row_GxBKd4": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "5. Quality Check & Refunds",
+            "icon": "none",
+            "row_content": "<p>Once we receive the returned product:</p><ul><li>It will undergo a <strong>strict quality check (QC)</strong></li><li>If the item <strong>passes QC</strong>, your <strong>refund will be processed</strong> to the original payment method within <strong>7–10 business days</strong></li><li>If the item <strong>fails QC</strong> (due to wear, alteration, damage, etc.), the return will be rejected and the item returned to you</li></ul>",
+            "page": ""
+          }
+        },
+        "collapsible_row_gePVq8": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "6. Damaged or Incorrect Deliveries",
+            "icon": "none",
+            "row_content": "<p>If your order arrives damaged or incorrect:</p><ul><li>Contact us within <strong>48 hours</strong> of delivery</li><li>Provide <strong>order number</strong> and <strong>clear photos</strong></li><li>We will arrange a <strong>replacement</strong> or <strong>full refund</strong> at no extra cost</li></ul>",
+            "page": ""
+          }
+        },
+        "collapsible_row_6jXpDT": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "7. International Returns",
+            "icon": "none",
+            "row_content": "<p>In accordance with UAE data protection regulations, you may:</p><ul><li>International returns are accepted but <strong>shipping fees, duties, and taxes are non-refundable</strong></li><li>Customers are responsible for any <strong>customs clearance or return shipping costs</strong></li></ul>",
+            "page": ""
+          }
+        },
+        "collapsible_row_Gb3tgL": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "8. Contact Information",
+            "icon": "none",
+            "row_content": "<p>For questions or concerns regarding this Return & Exchange Policy, or to exercise your rights, please contact us:</p><p><strong>Lausanne Jewellers® (Head Office)</strong></p><p><strong>Email:</strong> Lausanne@lausanne.ae<br/><strong>Landline: </strong>042259888<br/><strong>Mobile:</strong> +971 50 600 5514<br/><strong>Business Address:</strong> Shop No. 1, Shamal building Al Khor street, Near Gold House building P.O. Box 1697, Dubai, UAE.</p><p><strong>Lausanne Jewellers® (Branch 2)</strong></p><p><strong>Email:</strong> Lausanne@lausanne.ae<br/><strong>Landline: </strong>042266256<br/><strong>Mobile: </strong>+971 50 454 7350<br/><strong>Business Address:</strong> Essa & Mohammed Ebrahim Lootah Building no 12, Shop No. 2 OPP Gold Centre building, near gate no 03, Gold souk Deira Dubai, UAE.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_dLYnza",
+        "collapsible_row_qAaW9N",
+        "collapsible_row_gWRWRG",
+        "collapsible_row_abff97",
+        "collapsible_row_GxBKd4",
+        "collapsible_row_gePVq8",
+        "collapsible_row_6jXpDT",
+        "collapsible_row_Gb3tgL"
+      ],
+      "settings": {
+        "caption": "",
+        "heading": "Return & Exchange Policy",
+        "desc": "<p><strong>Effective Date: May, 2025</strong></p><p>At <strong>Lausanne Jewellers®</strong>, your satisfaction is our top priority. Every piece is a testament to timeless elegance and craftsmanship. In the rare case you are not fully delighted with your purchase, our Return & Exchange Policy is designed to be straightforward, secure, and in compliance with UAE consumer protection laws.</p>",
+        "heading_size": "h1",
+        "heading_alignment": "left",
+        "layout": "row",
+        "container_color_scheme": "",
+        "color_scheme": "",
+        "open_first_collapsible_row": true,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main",
+    "two_column_policy_info_bXcWfn"
+  ]
+}

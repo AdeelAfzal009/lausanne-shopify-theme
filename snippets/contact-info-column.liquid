@@ -1,0 +1,79 @@
+{%- comment -%}
+  Renders the "Call us" contact column used beside the contact form and policy pages.
+
+  Accepts:
+  - show_branch_2: {Boolean} Show the Branch 2 details below the head office
+
+  Usage:
+  {% render 'contact-info-column', show_branch_2: true %}
+{%- endcomment -%}
+
+{%- capture icon_phone -%}
+  <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+{%- endcapture -%}
+{%- capture icon_clock -%}
+  <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+{%- endcapture -%}
+{%- capture icon_email -%}
+  <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+{%- endcapture -%}
+{%- capture icon_mobile -%}
+  <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg>
+{%- endcapture -%}
+{%- capture icon_map_pin -%}
+  <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+{%- endcapture -%}
+
+<div class="right-column contact-info">
+  <h2 class="contact-heading">Call us</h2>
+  <p class="contact-info__item international-number">
+    <span class="contact-info__icon">{{ icon_phone }}</span>
+    <span>You may also reach us through our international number: <a href="tel:+97142259888">+971 42 259 888</a></span>
+  </p>
+  <p class="contact-info__item working-hours">
+    <span class="contact-info__icon">{{ icon_clock }}</span>
+    <span>Monday to Sunday from 10am to 10pm</span>
+  </p>
+
+  <h3 class="boutique-locator-heading">Lausanne Jewellers® (Head Office)</h3>
+  <ul class="contact-info__list boutique-help" role="list">
+    <li class="contact-info__item">
+      <span class="contact-info__icon">{{ icon_email }}</span>
+      <span>Email: <a href="mailto:Lausanne@lausanne.ae">Lausanne@lausanne.ae</a></span>
+    </li>
+    <li class="contact-info__item">
+      <span class="contact-info__icon">{{ icon_phone }}</span>
+      <span>Landline: <a href="tel:+97142259888">042259888</a></span>
+    </li>
+    <li class="contact-info__item">
+      <span class="contact-info__icon">{{ icon_mobile }}</span>
+      <span>Mobile: <a href="tel:+971506005514">+971 50 600 5514</a></span>
+    </li>
+    <li class="contact-info__item">
+      <span class="contact-info__icon">{{ icon_map_pin }}</span>
+      <span>Business Address: Shop No. 1, Shamal building Al Khor street, Near Gold House building P.O. Box 1697, Dubai, UAE.</span>
+    </li>
+  </ul>
+
+  {%- if show_branch_2 -%}
+    <h3 class="boutique-locator-heading">Lausanne Jewellers® (Branch 2)</h3>
+    <ul class="contact-info__list boutique-help" role="list">
+      <li class="contact-info__item">
+        <span class="contact-info__icon">{{ icon_email }}</span>
+        <span>Email: <a href="mailto:Lausanne@lausanne.ae">Lausanne@lausanne.ae</a></span>
+      </li>
+      <li class="contact-info__item">
+        <span class="contact-info__icon">{{ icon_phone }}</span>
+        <span>Landline: <a href="tel:+97142266256">042266256</a></span>
+      </li>
+      <li class="contact-info__item">
+        <span class="contact-info__icon">{{ icon_mobile }}</span>
+        <span>Mobile: <a href="tel:+971504547350">+971 50 454 7350</a></span>
+      </li>
+      <li class="contact-info__item">
+        <span class="contact-info__icon">{{ icon_map_pin }}</span>
+        <span>Business Address: Essa & Mohammed Ebrahim Lootah Building no 12, Shop No. 2 OPP Gold Centre building, near gate no 03, Gold souk Deira Dubai, UAE.</span>
+      </li>
+    </ul>
+  {%- endif -%}
+</div>

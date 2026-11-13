@@ -1,0 +1,317 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "image_with_text_7Xawi6": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_8c6CHy": {
+          "type": "heading",
+          "settings": {
+            "heading": "About Us",
+            "heading_size": "h1"
+          }
+        },
+        "text_r7qzCb": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Founded in 1985, Lausanne Jewellers® has stood as a beacon of trust and elegance in the heart of Dubai’s iconic Gold Souk. With a legacy built on the foundation of impeccable craftsmanship, we have become synonymous with luxury and sophistication. For over four decades, our commitment to creating timeless pieces of gold, diamond, and gemstone jewellery has earned us the admiration of discerning clients from around the world.</p>",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": [
+        "heading_8c6CHy",
+        "text_r7qzCb"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/Lausanne-About_51043631-2519-4378-97e6-53fbde19f567.jpg",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-1",
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "image_with_text_B3rJUw": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_AyVa9L": {
+          "type": "heading",
+          "settings": {
+            "heading": "Our Vision",
+            "heading_size": "h1"
+          }
+        },
+        "text_kr3Yxm": {
+          "type": "text",
+          "settings": {
+            "text": "<p>At Lausanne Jewellers® Jewellers, our vision is to be the leading symbol of luxury and craftsmanship, delivering timeless jewellery that transcends generations. We aim to redefine elegance by blending traditional artistry with contemporary design, creating pieces that resonate with our clients' most cherished moments. As we continue to grow, our commitment remains steadfast—to inspire confidence and trust through exceptional quality, unparalleled service, and a legacy of excellence that lasts for decades to come.</p>",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": [
+        "heading_AyVa9L",
+        "text_kr3Yxm"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/Lausanne-About.jpg",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-1",
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "rich_text_kK8de9": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_77btBV": {
+          "type": "heading",
+          "settings": {
+            "heading": "Recognition & Accolades",
+            "heading_size": "h1"
+          }
+        },
+        "text_3UzEAp": {
+          "type": "text",
+          "settings": {
+            "text": "<p>As we celebrate our 40th anniversary, we remain dedicated to offering our clients not only exquisite jewellery but an experience defined by quality, trust, and exceptional service. From the very beginning, our goal has been clear: to craft jewellery that becomes an enduring symbol of elegance and a cherished part of life's most memorable moments.<br/><br/>Lausanne Jewellers® is proud to serve generations of families, and as we look to the future, we are excited to continue our legacy of creating meaningful treasures that will be passed down for years to come.</p>"
+          }
+        },
+        "caption_n7Ntcz": {
+          "type": "caption",
+          "settings": {
+            "caption": "Pooja Jhaveri",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "large"
+          }
+        },
+        "caption_dTtEVE": {
+          "type": "caption",
+          "settings": {
+            "caption": "Managing Director",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "small"
+          }
+        }
+      },
+      "block_order": [
+        "heading_77btBV",
+        "text_3UzEAp",
+        "caption_n7Ntcz",
+        "caption_dTtEVE"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 0
+      }
+    },
+    "rich_text_dn8yAr": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_i8kQ4N": {
+          "type": "heading",
+          "settings": {
+            "heading": "Faces Of Lausanne Jewellers",
+            "heading_size": "h1"
+          }
+        },
+        "text_WNGRNH": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_i8kQ4N",
+        "text_WNGRNH"
+      ],
+      "disabled": true,
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 0
+      }
+    },
+    "multicolumn_pp33iy": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_Kqy7mj": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Pooja_-_Lausanne_Founder.png",
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_Kqy7mj"
+      ],
+      "settings": {
+        "title": "",
+        "heading_size": "h1",
+        "image_width": "half",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 2,
+        "column_alignment": "center",
+        "background_style": "none",
+        "color_scheme": "",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "rich_text_TYJ4cX": {
+      "type": "rich-text",
+      "blocks": {
+        "text_cNXQ9m": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Since 1985, Lausanne® Jewellers has been a symbol of trust and elegance in Dubai’s gold souk. Under Managing Director Pooja Jhaveri, we craft timeless gold, diamond, and gemstone jewellery, blending heritage with modern luxury to serve generations with exceptional quality.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "text_cNXQ9m"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "image_banner_XNxYt3": {
+      "type": "image-banner",
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/web_banner_3.jpg",
+        "mobile_image": "shopify://shop_images/web_banner_3_mbl.jpg",
+        "image_overlay_opacity": 0,
+        "image_height": "adapt",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": false,
+        "color_scheme": "",
+        "stack_images_on_mobile": false,
+        "mobile_content_alignment": "center",
+        "show_text_below": false
+      }
+    },
+    "multicolumn_7D8jWw": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_aiCfdN": {
+          "type": "column",
+          "settings": {
+            "title": "Delivery & Returns",
+            "text": "<p>Offered for all orders</p>",
+            "link_label": "LEARN MORE",
+            "link": "shopify://pages/return-exchange-policy"
+          }
+        },
+        "column_fx8iVp": {
+          "type": "column",
+          "settings": {
+            "title": "Contact a personal advisor",
+            "text": "<p>Our personal advisors will be delighted to assist you at +971 42 259 888</p>",
+            "link_label": "CONTACT US",
+            "link": "shopify://pages/contact"
+          }
+        },
+        "column_PKAkUr": {
+          "type": "column",
+          "settings": {
+            "title": "Our services offered",
+            "text": "<p>Personalize, adjust or revive your creations</p>",
+            "link_label": "CARE AND SERVICES",
+            "link": "shopify://pages/lausanne-care-and-services"
+          }
+        }
+      },
+      "block_order": [
+        "column_aiCfdN",
+        "column_fx8iVp",
+        "column_PKAkUr"
+      ],
+      "custom_css": [
+        "@media only screen and (max-width: 767px) {li.multicolumn-list__item.grid__item {background: #f5f5f5; }}"
+      ],
+      "settings": {
+        "title": "",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "none",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_with_text_7Xawi6",
+    "image_with_text_B3rJUw",
+    "rich_text_kK8de9",
+    "rich_text_dn8yAr",
+    "multicolumn_pp33iy",
+    "rich_text_TYJ4cX",
+    "image_banner_XNxYt3",
+    "multicolumn_7D8jWw"
+  ]
+}

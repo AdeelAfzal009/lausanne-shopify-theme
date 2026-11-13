@@ -1,0 +1,167 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "two_column_policy_info_Nky7BU": {
+      "type": "two-column-policy-info",
+      "blocks": {
+        "collapsible_row_9hbADc": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "1. Legal Entity and Jurisdiction",
+            "icon": "none",
+            "row_content": "<p><strong>Lausanne Jewellers LLC®</strong> is a company duly incorporated in the United Arab Emirates with its registered officeat Shop No.1, Shamal building Al Khor Street, Near Gold House building P.O. Box 1697, Dubai, UAE. These Termsshall be governed and construed in accordance with the laws of the UAE. Any disputes arising from these Termsshall fall under the exclusive jurisdiction of UAE courts.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_rgJPMB": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "2. Eligibility",
+            "icon": "none",
+            "row_content": "<p>To place an order or use certain services on our Website, you must:</p><ul><li>Be at least 18 years of age<br/></li><li>Provide accurate and complete personal and payment information<br/></li><li>Use the Website in compliance with all applicable laws</li></ul><p>We reserve the right to refuse service or cancel orders at our sole discretion.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_U4PEfp": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "3. Product Descriptions and Availability",
+            "icon": "none",
+            "row_content": "<p>We strive to ensure all product descriptions, images, and pricing are accurate. However:</p><ul><li>Colors may vary slightly due to screen resolution or lighting</li><li>All products are subject to availability</li><li>We reserve the right to modify or discontinue any item without prior notice</li></ul>",
+            "page": ""
+          }
+        },
+        "collapsible_row_wEinUb": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "4. Orders and Payments",
+            "icon": "none",
+            "row_content": "<p>By placing an order on our Website:</p><ul><li>You agree to pay the total amount displayed, including applicable taxes and delivery fees</li><li>Payment must be made using one of our secure, authorized payment gateways</li><li>Receipt of payment constitutes confirmation, not acceptance, of your order</li><li>We reserve the right to cancel any order for reasons including suspected fraud or error</li></ul>",
+            "page": ""
+          }
+        },
+        "collapsible_row_edpRTd": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "5. Shipping and Delivery",
+            "icon": "none",
+            "row_content": "<p>We offer domestic and international shipping. Please refer to our <strong>Shipping Policy</strong> for details on:</p><ul><li>Estimated delivery times</li><li>Tracking options</li><li>Customs duties or import taxes (where applicable)</li></ul><p>Delays beyond our control (e.g., customs, courier issues) are not grounds for liability or cancellation.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_LHRTfC": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "6. Returns and Exchanges",
+            "icon": "none",
+            "row_content": "<p>We accept returns and exchanges in accordance with our <strong>Return Policy</strong>, subject to the following:</p><ul><li>Items must be returned unused, in original packaging, with proof of purchase</li><li>Certain custom-made or final-sale items may not be eligible</li><li>Refunds will be processed to the original method of payment within 5-7 business days</li></ul>",
+            "page": ""
+          }
+        },
+        "collapsible_row_jEj4RC": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "7. Intellectual Property",
+            "icon": "none",
+            "row_content": "<p>All content on the Website, including images, logos, designs, and product names, are the intellectual property of Lausanne Jewellers® or its licensors. You may not reproduce, distribute, or use any part of this Website without prior written consent.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_Fpe7ec": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "8. Privacy and Data Protection",
+            "icon": "none",
+            "row_content": "<p>Your use of the Website is also governed by our <strong>Privacy Policy</strong>, which outlines how we collect, use, and protect your personal data in compliance with UAE data protection laws.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_Qffi7B": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "9. Limitation of Liability",
+            "icon": "none",
+            "row_content": "<p>To the fullest extent permitted by UAE law, Lausanne Jewellers® shall not be liable for:</p><ul><li>Any indirect, incidental, or consequential damages</li><li>Losses arising from your use or inability to use the Website</li><li>Unauthorized access to or use of your personal data</li></ul><p>Our total liability for any claim shall not exceed the amount paid for the specific product or service.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_8V9wTC": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "10. Force Majeure",
+            "icon": "none",
+            "row_content": "<p>We are not liable for failure to perform any obligations due to events beyond our control, including but not limited to natural disasters, war, cyberattacks, or disruptions to shipping or supply chains.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_LbkXx8": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "11. Amendments",
+            "icon": "none",
+            "row_content": "<p>We reserve the right to update or modify these Terms at any time. Changes will be posted on this page with the updated “Effective Date.” Continued use of the Website constitutes acceptance of the revised Terms.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_JtVi3T": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "12. Contact Information",
+            "icon": "none",
+            "row_content": "<p>If you have any questions regarding these Terms, please contact us:</p><p><strong>Lausanne Jewellers® (Head Office)</strong></p><p><strong>Email:</strong> Lausanne@lausanne.ae<br/><strong>Landline: </strong>042259888<br/><strong>Mobile:</strong> +971 50 600 5514<br/><strong>Business Address:</strong> Shop No. 1, Shamal building Al Khor street, Near Gold House building P.O. Box 1697, Dubai, UAE.</p><p><strong>Lausanne Jewellers® (Branch 2)</strong></p><p><strong>Email:</strong> Lausanne@lausanne.ae<br/><strong>Landline: </strong>042266256<br/><strong>Mobile: </strong>+971 50 454 7350<br/><strong>Business Address:</strong> Essa & Mohammed Ebrahim Lootah Building no 12, Shop No. 2 OPP Gold Centre building, near gate no 03, Gold souk Deira Dubai, UAE.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_9hbADc",
+        "collapsible_row_rgJPMB",
+        "collapsible_row_U4PEfp",
+        "collapsible_row_wEinUb",
+        "collapsible_row_edpRTd",
+        "collapsible_row_LHRTfC",
+        "collapsible_row_jEj4RC",
+        "collapsible_row_Fpe7ec",
+        "collapsible_row_Qffi7B",
+        "collapsible_row_8V9wTC",
+        "collapsible_row_LbkXx8",
+        "collapsible_row_JtVi3T"
+      ],
+      "settings": {
+        "caption": "",
+        "heading": "Terms and Conditions",
+        "desc": "<p><strong>Effective Date: May, 2025</strong></p><p>Welcome to https://lausanne.com (“Website”), the official online store operated by <strong>Lausanne Jewellers LLC® </strong>(“Lausanne® Jewelers”, “we”, “us”, or “our”). These Terms and Conditions (“Terms”) govern your access to and use of our Website, including any purchases you make through our platform.</p><p>By accessing or using the Website, you agree to be legally bound by these Terms. If you do not accept these Terms, please refrain from using the Website.</p>",
+        "heading_size": "h1",
+        "heading_alignment": "left",
+        "layout": "row",
+        "container_color_scheme": "",
+        "color_scheme": "",
+        "open_first_collapsible_row": true,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 12,
+        "padding_bottom": 12
+      }
+    }
+  },
+  "order": [
+    "main",
+    "two_column_policy_info_Nky7BU"
+  ]
+}
